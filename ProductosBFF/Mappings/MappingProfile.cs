@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using ProductosBFF.Domain.Parameters;
+using ProductosBFF.Models.BCCesantia;
 using System;
 using System.Linq;
 using System.Reflection;
-using ProductosBFF.Domain.Parameters;
-using ProductosBFF.Models.BCCesantia;
 
 namespace ProductosBFF.Mappings
 {

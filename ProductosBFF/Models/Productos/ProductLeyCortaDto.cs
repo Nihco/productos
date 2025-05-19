@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ProductosBFF.Domain.Productos;
 using ProductosBFF.Mappings;
+using System;
 using System.Globalization;
 
 namespace ProductosBFF.Models.Productos
@@ -39,7 +40,7 @@ namespace ProductosBFF.Models.Productos
         /// fecha usar desde producto
         /// </summary>
         public string usar_desde { get; set; }
-        
+
         /// <summary>
         /// fecha usar hasta producto
         /// </summary>
@@ -116,7 +117,8 @@ namespace ProductosBFF.Models.Productos
                 .ForMember(dto => dto.fecha_inicio, opt => opt.MapFrom(src => src.fecha_inicio.ToString("dd/MM/yyyy", culture)))
                 .ForMember(dto => dto.incluido_plan, dom => dom.MapFrom(d => d.incluido_plan))
                 .ForMember(dto => dto.usar_desde, opt => opt.MapFrom(src => src.usar_desde.ToString("dd/MM/yyyy", culture)))
-                .ForMember(dto => dto.usar_hasta, opt => opt.MapFrom(src => src.usar_hasta.ToString("dd/MM/yyyy", culture)))
+                .ForMember(dto => dto.usar_hasta, opt => opt.MapFrom(src =>
+                    src.usar_hasta.Date == new DateTime(1, 1, 1) ? null : src.usar_hasta.ToString("dd/MM/yyyy", culture)))
                 .ForMember(dto => dto.plazo_valido, dom => dom.MapFrom(d => d.plazo_valido))
                 .ForMember(dto => dto.codigo_plan, dom => dom.MapFrom(d => d.codigo_plan))
                 .ForMember(dto => dto.plazo_uso, dom => dom.MapFrom(d => d.plazo_uso))

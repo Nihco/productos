@@ -26,7 +26,7 @@ namespace ProductosBFF.Utils
             }
             else
             {
-                return word[0].ToString().ToUpper() + word.Substring(1).ToString().ToLower();
+                return word[0].ToString().ToUpper() + word[1..].ToLower();
             }
         }
 
@@ -59,7 +59,7 @@ namespace ProductosBFF.Utils
         public static string GetPathAndQuery(string url)
         {
             var uri = new Uri(url);
-            return uri.PathAndQuery.Substring(1, uri.PathAndQuery.Length - 1);
+            return uri.PathAndQuery[1..];
         }
     }
 }

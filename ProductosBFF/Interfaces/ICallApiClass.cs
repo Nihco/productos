@@ -16,7 +16,7 @@ namespace ProductosBFF.Interfaces
         /// <param name="varIn">Objeto que tiene las variables de entrada, puede ser null</param>
         /// <returns></returns>
         public Task<T> GetApi<T>(string appName, string method, object varIn);
-        
+
         /// <summary>
         /// Método que llama API via POST
         /// </summary>

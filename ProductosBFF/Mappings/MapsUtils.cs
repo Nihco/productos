@@ -1,6 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Reflection;
-using AutoMapper;
 
 namespace ProductosBFF.Mappings
 {
@@ -25,7 +25,7 @@ namespace ProductosBFF.Mappings
                 foreach (PropertyInfo destProperty in destType.GetProperties())
                 {
                     if (!destProperty.Name.StartsWith("Piv") && !destProperty.Name.StartsWith("Pin")) continue;
-                    string srcPropertyName = destProperty.Name.Substring(3); // Elimina los primeros 3 caracteres (Piv o Pin)
+                    string srcPropertyName = destProperty.Name[3..]; // Elimina los primeros 3 caracteres (Piv o Pin)
                     PropertyInfo srcProperty = srcType.GetProperty(srcPropertyName);
 
                     if (srcProperty == null || srcProperty.PropertyType != destProperty.PropertyType) continue;

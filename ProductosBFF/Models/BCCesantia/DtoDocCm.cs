@@ -1,7 +1,7 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using ProductosBFF.Domain.Parameters;
 using ProductosBFF.Mappings;
+using System;
 
 namespace ProductosBFF.Models.BCCesantia
 {
@@ -112,8 +112,8 @@ namespace ProductosBFF.Models.BCCesantia
                 .ForMember(dest => dest.StrCodAccion, opt => opt.MapFrom(src => "INGDOCTO"))
                 .ForMember(dest => dest.IdFolio, opt => opt.MapFrom(src => src.FolioAfil.ToString()))
                 .ForMember(dest => dest.Imagen, opt => opt.MapFrom(src => src.Imagen))
-                .ForMember(dest => dest.ApMat, opt => opt.MapFrom(src =>src.Apellidos.Split(new char[]{' '},2)[1]))
-                .ForMember(dest => dest.ApPat, opt => opt.MapFrom(src =>src.Apellidos.Split(new char[]{' '},2)[0]))
+                .ForMember(dest => dest.ApMat, opt => opt.MapFrom(src => src.Apellidos.Split(new char[] { ' ' }, 2)[1]))
+                .ForMember(dest => dest.ApPat, opt => opt.MapFrom(src => src.Apellidos.Split(new char[] { ' ' }, 2)[0]))
                 .ForMember(dest => dest.Nombres, opt => opt.MapFrom(src => src.Nombres))
                 .ForMember(dest => dest.Rut, opt => opt.MapFrom(src => src.RutAfil.ToString()))
                 .ForMember(dest => dest.Dig, opt => opt.MapFrom(src => src.DvAfil.ToString()))

@@ -16,7 +16,7 @@ namespace ProductosBFF.Interfaces
         /// <param name="headers"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        Task<T> GetAsync<T>(string url, object queryParams = null,Dictionary<string, string> headers = null);
+        Task<T> GetAsync<T>(string url, object queryParams = null, Dictionary<string, string> headers = null);
 
         /// <summary>
         /// 
@@ -27,7 +27,7 @@ namespace ProductosBFF.Interfaces
         /// <param name="headers"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        Task<T> PostAsync<T>(string url, object body = null, object queryParams = null,Dictionary<string, string> headers = null);
+        Task<T> PostAsync<T>(string url, object body = null, object queryParams = null, Dictionary<string, string> headers = null);
 
         /// <summary>
         /// 
@@ -38,6 +38,6 @@ namespace ProductosBFF.Interfaces
         /// <param name="headers"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        Task<T> PutAsync<T>(string url, object body = null, object queryParams = null,Dictionary<string, string> headers = null);
+        Task<T> PutAsync<T>(string url, object body = null, object queryParams = null, Dictionary<string, string> headers = null);
     }
 }

@@ -207,7 +207,7 @@ namespace ProductosBFF.Services
                 string idContentManager;
                 ResponseValidaFun4 funEncontrado =
                     await _productoInfrastructure.ValidaFun4(new ObtieneFun4
-                        { Folio = solicitud.FolioAfil.ToString() });
+                    { Folio = solicitud.FolioAfil.ToString() });
 
                 var dtoAfil = _mapper.Map<DtoAfil>(solicitud);
 

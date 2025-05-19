@@ -17,7 +17,7 @@
         /// TipoAtencion
         /// </summary>
         public decimal TipoAtencion { get; set; }
-        
+
         /// <summary>
         /// MarcaUrgencia
         /// </summary>

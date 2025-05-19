@@ -6,48 +6,48 @@ namespace ProductosBFF.Models.BCCesantia
     /// <summary>
     /// Clase
     /// </summary>
-    public class DtoDetalleSolicitudVC :IMapFrom<ResponseDetalleSolicitudVC>
+    public class DtoDetalleSolicitudVC : IMapFrom<ResponseDetalleSolicitudVC>
     {
         /// <summary>
         /// Diagnostico
         /// </summary>
         public string diagnostico { get; set; }
-        
+
         /// <summary>
         /// Nombre Beneficiario
         /// </summary>
         public string beneficiario { get; set; }
-        
+
         /// <summary>
         /// Tipo Solicitud
         /// </summary>
         public string tipoSolicitud { get; set; }
-        
+
         /// <summary>
         /// Producto Adicional
         /// </summary>
         public string productoAdicional { get; set; }
-        
+
         /// <summary>
         /// Fecha Solicitud
         /// </summary>
         public string fechaSolicitud { get; set; }
-        
+
         /// <summary>
         /// Id Solicitud Original
         /// </summary>
         public decimal nroSolicitud { get; set; }
-        
+
         /// <summary>
         /// Descripcion Tipo Solicitud
         /// </summary>
         public string montoReembolsado { get; set; }
-        
+
         /// <summary>
         /// Color Tipo Solicitud
         /// </summary>
         public string color { get; set; }
-        
+
         /// <summary>
         /// Id Relacionado
         /// </summary>

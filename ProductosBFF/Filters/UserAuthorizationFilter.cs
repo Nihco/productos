@@ -120,24 +120,22 @@ namespace ProductosBFF.Filters
             string _urlApi = _configuration.GetValue<string>("SEGURIDAD:SEGURIDAD_URL");
 
             Uri _rest_server_uri;
-            _rest_server_uri = new Uri(string.Concat(_urlApi));
-            using (var _client = new HttpClient())
+            _rest_server_uri = new Uri(_urlApi);
+            using var _client = new HttpClient();
+            HttpContent Contenido = SerializaJson.CreateHttpContent(objAuthorization);
+            var result = _client.PostAsync(_rest_server_uri, Contenido).Result;
+            int statusCode = (int)result.StatusCode;
+            switch (statusCode)
             {
-                HttpContent Contenido = SerializaJson.CreateHttpContent(objAuthorization);
-                var result = _client.PostAsync(_rest_server_uri, Contenido).Result;
-                int statusCode = (int)result.StatusCode;
-                switch (statusCode)
-                {
-                    case 401:
-                        context.Result = new UnauthorizedResult();
-                        return;
-                    case 403:
-                        context.Result = new ObjectResult("Forbidden") { StatusCode = 403 };
-                        return;
-                    case 500:
-                        context.Result = new BadRequestResult();
-                        return;
-                }
+                case 401:
+                    context.Result = new UnauthorizedResult();
+                    return;
+                case 403:
+                    context.Result = new ObjectResult("Forbidden") { StatusCode = 403 };
+                    return;
+                case 500:
+                    context.Result = new BadRequestResult();
+                    return;
             }
         }
     }

@@ -1359,7 +1359,7 @@
             <param name="rut"></param>
             <returns></returns>
         </member>
-        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.CancelarBcCostoCero(ProductosBFF.Domain.Parameters.BodyCancelarBcParam)">
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.CancelarBcCostoCero(ProductosBFF.Domain.Parameters.BodyCancelarParamDto)">
             <summary>
             
             </summary>
@@ -1837,9 +1837,10 @@
         </member>
         <member name="M:ProductosBFF.Interfaces.IProductoService.CancelaBcCostoCero(ProductosBFF.Domain.Parameters.BodyCancelarBcParam)">
             <summary>
-            Servicio que cancela bc costo cero
+            
             </summary>
-            <param name="bodyCancelarBcParam"></param>
+            <param name="folio"></param>
+            <param name="domiCodigo"></param>
             <returns></returns>
         </member>
         <member name="M:ProductosBFF.Interfaces.IProductoService.GetDocumentsBase64(ProductosBFF.Domain.Parameters.ProductoBC)">

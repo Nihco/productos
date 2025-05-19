@@ -1,6 +1,6 @@
-﻿using System;
-using ProductosBFF.Domain.Parameters;
+﻿using ProductosBFF.Domain.Parameters;
 using ProductosBFF.Mappings;
+using System;
 
 namespace ProductosBFF.Models.BCCesantia
 {

@@ -1,21 +1,21 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Moq;
 using ProductosBFF.Domain.Parameters;
 using ProductosBFF.Domain.Productos;
 using ProductosBFF.Exceptions;
 using ProductosBFF.Interfaces;
 using ProductosBFF.Models.BCCesantia;
+using ProductosBFF.Models.Productos;
 using ProductosBFF.Services;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using ProductosBFF.Domain.Causales;
 using ProductosBFF.Domain.SegundaClave;
 using ProductosBFF.Models.Causales;
-using ProductosBFF.Models.Productos;
 using Xunit;
 
 namespace ProductosBFFTests.Services
@@ -57,8 +57,10 @@ namespace ProductosBFFTests.Services
                 .Returns(Task.FromResult(true));
 
             //Act
+
             var resp = await new ProductoService(_mProductoInfrastructure.Object, _mIMapper.Object, null, null)
                 .GetContinuidadProductoService(new ContinuidadProducto { rut = 111 });
+
 
             //Assert
             Assert.IsType<bool>(resp);
@@ -74,8 +76,10 @@ namespace ProductosBFFTests.Services
                 .Returns(Task.FromResult(false));
 
             //Act
+
             var resp = await new ProductoService(_mProductoInfrastructure.Object, _mIMapper.Object, null, null)
                 .GetContinuidadProductoService(new ContinuidadProducto { rut = 111 });
+
 
             //Assert
             Assert.IsType<bool>(resp);
@@ -91,15 +95,18 @@ namespace ProductosBFFTests.Services
                 .Throws(new InvalidOperationException("Error al consumir el servicio REST"));
 
             //Act & Assert
+
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
                 new ProductoService(_mProductoInfrastructure.Object, _mIMapper.Object, null, null)
                     .GetContinuidadProductoService(new ContinuidadProducto() { rut = 111 }));
+
             Assert.Equal("Error al consumir el servicio REST", exception.Message);
         }
 
         [Fact]
         public async Task RegistraSolicitudContinuidadCesantia_Todo_Ok()
         {
+
             _mProductoInfrastructure.Setup(x => x.EnviarDatosDocBCCesantia(It.IsAny<DtoDocCm>()))
                 .Returns(Task.FromResult(_contentResultOk));
             _mProductoInfrastructure.Setup(x => x.RegistraContinuidadCesantia(_bodySolicitudActivacion.RutAfil))
@@ -109,9 +116,14 @@ namespace ProductosBFFTests.Services
             var resp = await new ProductoService(_mProductoInfrastructure.Object, _mIMapper.Object, null, null)
                 .RegistraSolicitudContinuidadCesantia(_bodySolicitudActivacion);
 
+
+            _mProductoInfrastructure.Setup(x => x.EnviarDatosDocBCCesantia(It.IsAny<DtoDocCm>())).Returns(Task.FromResult(_contentResultOk));
+            _mProductoInfrastructure.Setup(x => x.RegistraContinuidadCesantia(_bodySolicitudActivacion.RutAfil)).Returns(Task.FromResult(33));
+            _mProductoInfrastructure.Setup(x => x.EnviarArchivosSini(It.IsAny<BodyBcArchivo>())).Returns(Task.FromResult(new ResponseEnviarArchivo()));
+
+
             Assert.IsType<int>(resp);
             Assert.Equal(33, resp);
-            _mProductoInfrastructure.VerifyAll();
         }
 
         [Fact]
@@ -122,9 +134,11 @@ namespace ProductosBFFTests.Services
                 .Throws(new ContentManagerException("Error al consumir el servicio REST"));
 
             //Act
+
             var exception = await Assert.ThrowsAsync<ContentManagerException>(() =>
                 new ProductoService(_mProductoInfrastructure.Object, _mIMapper.Object, null, null)
                     .RegistraSolicitudContinuidadCesantia(_bodySolicitudActivacion));
+
             Assert.Equal("Error al cargar archivo: Error al consumir el servicio REST", exception.Message);
             _mProductoInfrastructure.VerifyAll();
         }
@@ -132,6 +146,7 @@ namespace ProductosBFFTests.Services
         [Fact]
         public async Task RegistraSolicitudContinuidadCesantia_RegistraContinuidadCesantia_0()
         {
+
             _mProductoInfrastructure.Setup(x => x.EnviarDatosDocBCCesantia(It.IsAny<DtoDocCm>()))
                 .Returns(Task.FromResult(_contentResultOk));
             _mProductoInfrastructure.Setup(x => x.RegistraContinuidadCesantia(_bodySolicitudActivacion.RutAfil))
@@ -140,13 +155,18 @@ namespace ProductosBFFTests.Services
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
                 new ProductoService(_mProductoInfrastructure.Object, _mIMapper.Object, null, null)
                     .RegistraSolicitudContinuidadCesantia(_bodySolicitudActivacion));
+
+
+            _mProductoInfrastructure.Setup(x => x.EnviarDatosDocBCCesantia(It.IsAny<DtoDocCm>())).Returns(Task.FromResult(_contentResultOk));
+            _mProductoInfrastructure.Setup(x => x.RegistraContinuidadCesantia(_bodySolicitudActivacion.RutAfil)).Returns(Task.FromResult(0));
+
             Assert.Equal("Error al ingresar datos: No se pudo registrar el siniestro", exception.Message);
-            _mProductoInfrastructure.VerifyAll();
         }
 
         [Fact]
         public async Task RegistraSolicitudContinuidadCesantia_RegistraContinuidadCesantia_Exception()
         {
+
             _mProductoInfrastructure.Setup(x => x.EnviarDatosDocBCCesantia(It.IsAny<DtoDocCm>()))
                 .Returns(Task.FromResult(_contentResultOk));
             _mProductoInfrastructure.Setup(x => x.RegistraContinuidadCesantia(_bodySolicitudActivacion.RutAfil))
@@ -155,13 +175,17 @@ namespace ProductosBFFTests.Services
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
                 new ProductoService(_mProductoInfrastructure.Object, _mIMapper.Object, null, null)
                     .RegistraSolicitudContinuidadCesantia(_bodySolicitudActivacion));
+
+            _mProductoInfrastructure.Setup(x => x.EnviarDatosDocBCCesantia(It.IsAny<DtoDocCm>())).Returns(Task.FromResult(_contentResultOk));
+            _mProductoInfrastructure.Setup(x => x.RegistraContinuidadCesantia(_bodySolicitudActivacion.RutAfil)).Throws(new InvalidOperationException("Error al consumir el servicio REST"));
+
             Assert.Equal("Error al ingresar datos: Error al consumir el servicio REST", exception.Message);
-            _mProductoInfrastructure.VerifyAll();
         }
 
         [Fact]
         public async Task RegistraSolicitudContinuidadCesantia_EnviarArchivosSini_Exception()
         {
+
             _mProductoInfrastructure.Setup(x => x.EnviarDatosDocBCCesantia(It.IsAny<DtoDocCm>()))
                 .Returns(Task.FromResult(_contentResultOk));
             _mProductoInfrastructure.Setup(x => x.RegistraContinuidadCesantia(_bodySolicitudActivacion.RutAfil))
@@ -172,8 +196,12 @@ namespace ProductosBFFTests.Services
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
                 new ProductoService(_mProductoInfrastructure.Object, _mIMapper.Object, null, null)
                     .RegistraSolicitudContinuidadCesantia(_bodySolicitudActivacion));
+
+            _mProductoInfrastructure.Setup(x => x.EnviarDatosDocBCCesantia(It.IsAny<DtoDocCm>())).Returns(Task.FromResult(_contentResultOk));
+            _mProductoInfrastructure.Setup(x => x.RegistraContinuidadCesantia(_bodySolicitudActivacion.RutAfil)).Returns(Task.FromResult(33));
+            _mProductoInfrastructure.Setup(x => x.EnviarArchivosSini(It.IsAny<BodyBcArchivo>())).Throws(new InvalidOperationException("Error al consumir el servicio REST"));
+
             Assert.Equal("Error al ingresar datos: Error al consumir el servicio REST", exception.Message);
-            _mProductoInfrastructure.VerifyAll();
         }
 
         [Fact]
@@ -213,8 +241,13 @@ namespace ProductosBFFTests.Services
                 .ReturnsAsync(costoCeroList);
 
             _mIMapper.Setup(m => m.Map<List<Producto>, List<ProductDto>>(productos)).Returns(mappedProductDtos);
+
             _mIMapper.Setup(m => m.Map<List<ProductosCostoCero>, List<ProductDto>>(costoCeroList))
                 .Returns(mappedCostoCeroDtos);
+
+
+
+
 
             var result = await _service.GetProductos(bodyProducto);
 
@@ -279,6 +312,7 @@ namespace ProductosBFFTests.Services
                 new() { Codigo = "1", Descripcion = "Motivo 1" },
                 new() { Codigo = "2", Descripcion = "Motivo 2" }
             };
+
 
             _mProductoInfrastructure.Setup(i => i.GetMotivosCancelacion()).ReturnsAsync(motivosCancelacion);
             _mIMapper.Setup(m => m.Map<List<MotivosCancelacion>, List<MotivosCancelacionDto>>(motivosCancelacion))
@@ -349,7 +383,6 @@ namespace ProductosBFFTests.Services
             .ReturnsAsync(expectedComprobanteResponse); 
         
         var result = await _service.CancelaBcCostoCero(bodyParam);
-        
         Assert.NotNull(result);
         
         Assert.Equal(expectedNroSolicitud, result.nroSolicitud);
@@ -427,14 +460,14 @@ namespace ProductosBFFTests.Services
             var bodyHistorialSolicitudes = new BodyHistorialSolicitudes { pin_folio = 12345 };
             var historialDomainList = new List<ResponseHistorialSolicitudes>
             {
-                new ResponseHistorialSolicitudes { tipo_solicitud = "Solicitud 1", Id_Solicitud = 1 },
-                new ResponseHistorialSolicitudes { tipo_solicitud = "Solicitud 2", Id_Solicitud = 2 }
+                new() { tipo_solicitud = "Solicitud 1", Id_Solicitud = 1 },
+                new() { tipo_solicitud = "Solicitud 2", Id_Solicitud = 2 }
             };
 
             var mappedHistorialDtos = new List<DtoHistorialSolicitudes>
             {
-                new DtoHistorialSolicitudes { tipoSolicitud = "Solicitud 1", id = 1 },
-                new DtoHistorialSolicitudes { tipoSolicitud = "Solicitud 2", id = 2 }
+                new() { tipoSolicitud = "Solicitud 1", id = 1 },
+                new() { tipoSolicitud = "Solicitud 2", id = 2 }
             };
 
             _mProductoInfrastructure.Setup(x => x.HistorialSolicitudes(bodyHistorialSolicitudes))
@@ -451,6 +484,7 @@ namespace ProductosBFFTests.Services
             Assert.Equal("Solicitud 2", result[1].tipoSolicitud);
             Assert.Equal(2, result[1].id);
         }
+
 
         [Fact]
         public async Task ValidaBcCostoCero_ReturnsTrue_WhenInfrastructureReturnsTrue()

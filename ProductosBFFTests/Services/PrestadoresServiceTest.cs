@@ -103,7 +103,6 @@ namespace ProductosBFFTests.Services
         public async Task GetPrestadores_CuandoInfraestructuraDevuelveNull_DebeLanzarInvalidOperationException()
         {
             var bodyPrestadores = new BodyPrestadores { PIN_BC = 11111 };
-            PrestadoresLeyCorta prestadoresNulosDesdeInfra = null;
 
             _mockPrestadoresInfrastructure
                 .Setup(infra => infra.GetPrestadoresAsync(bodyPrestadores))

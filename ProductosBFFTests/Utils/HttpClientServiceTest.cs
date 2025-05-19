@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Moq.Protected;
 using Newtonsoft.Json;
 using ProductosBFF.Utils;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ProductosBFFTests.Utils
@@ -30,7 +30,7 @@ namespace ProductosBFFTests.Utils
             _configMock.Setup(c => c["PRODUCTO_HEADER_VALUE"]).Returns("headerValue");
             _httpClientService = new HttpClientService(_httpClientFactoryMock.Object, _configMock.Object, _loggerMock.Object);
         }
-        
+
         [Fact]
         public async Task GetAsync_ReturnsData_OnSuccess()
         {
@@ -52,13 +52,13 @@ namespace ProductosBFFTests.Utils
 
             var client = new HttpClient(httpClientMock.Object);
             _httpClientFactoryMock.Setup(f => f.CreateClient(It.IsAny<string>())).Returns(client);
-          
+
             var result = await _httpClientService.GetAsync<object>("https://test.com/api");
-            
+
             Assert.NotNull(result);
             Assert.Equal(expectedData.Name, ((dynamic)result).Name.ToString());
         }
-        
+
         [Fact]
         public async Task GetAsync_LogsError_OnNotFound()
         {
@@ -75,12 +75,12 @@ namespace ProductosBFFTests.Utils
 
             var client = new HttpClient(httpClientMock.Object);
             _httpClientFactoryMock.Setup(f => f.CreateClient(It.IsAny<string>())).Returns(client);
-            
+
             var result = await _httpClientService.GetAsync<object>("https://test.com/api");
-            
+
             Assert.Null(result);
         }
-        
+
         [Fact]
         public void AddHeaders_AddsConfiguredHeaders()
         {
@@ -92,11 +92,11 @@ namespace ProductosBFFTests.Utils
             {
                 { "headerName", "value" }
             };
-            
+
             _httpClientService.GetType()
                 .GetMethod("AddHeaders", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
                 ?.Invoke(_httpClientService, new object[] { request, headers });
-            
+
             Assert.True(request.Headers.Contains("headerName"));
             Assert.Equal("headerValue", request.Headers.GetValues("headerName").First());
         }

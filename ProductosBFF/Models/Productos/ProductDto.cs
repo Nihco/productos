@@ -113,18 +113,18 @@ namespace ProductosBFF.Models.Productos
         /// </summary>
         public bool es_urgencia { get; set; }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
         public bool es_vida_camara { get; set; }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
         public bool es_caec { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>

@@ -15,7 +15,7 @@ namespace ProductosBFFTests.Domain
             const string expectedMarcaIntervencion = "Intervencion";
             const string expectedRcaSeguro = "Seguro";
             const string expectedContinuidad = "Continuidad";
-            
+
             var bodyDocumentosAccidente = new BodyDocumentosAccidente
             {
                 IdBc = expectedIdBc,
@@ -26,7 +26,7 @@ namespace ProductosBFFTests.Domain
                 RcaSeguro = expectedRcaSeguro,
                 Continuidad = expectedContinuidad
             };
-            
+
             Assert.Equal(expectedIdBc, bodyDocumentosAccidente.IdBc);
             Assert.Equal(expectedTipoAccidente, bodyDocumentosAccidente.TipoAccidente);
             Assert.Equal(expectedTipoAtencion, bodyDocumentosAccidente.TipoAtencion);

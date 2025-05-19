@@ -12,42 +12,42 @@ namespace ProductosBFF.Models.BCCesantia
         /// Diagnostico
         /// </summary>
         public string causalDespido { get; set; }
-        
+
         /// <summary>
         /// Nombre Beneficiario
         /// </summary>
         public string beneficiario { get; set; }
-        
+
         /// <summary>
         /// Tipo Solicitud
         /// </summary>
         public string tipoSolicitud { get; set; }
-        
+
         /// <summary>
         /// Producto Adicional
         /// </summary>
         public string productoAdicional { get; set; }
-        
+
         /// <summary>
         /// Fecha Solicitud
         /// </summary>
         public string fechaSolicitud { get; set; }
-        
+
         /// <summary>
         /// Id Solicitud Original
         /// </summary>
         public decimal nroSolicitud { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
         public string Estado { get; set; }
-        
+
         /// <summary>
         /// Color Tipo Solicitud
         /// </summary>
         public string color { get; set; }
-        
+
         /// <summary>
         /// Id Relacionado
         /// </summary>
@@ -71,6 +71,6 @@ namespace ProductosBFF.Models.BCCesantia
                 .ForMember(dest => dest.IDRELACIONADO, opt => opt.MapFrom(src => src.IDRELACIONADO));
         }
     }
-    
-    
+
+
 }

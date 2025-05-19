@@ -25,7 +25,7 @@ namespace ProductosBFF.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductoService _productoService;
-        
+
         private readonly ILogger<ProductsController> _logger;
 
         /// <summary>
@@ -179,12 +179,12 @@ namespace ProductosBFF.Controllers
         /// </summary>
         /// <returns></returns>
 		[HttpGet("GetMotivosCancelacion")]
-		[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MotivosCancelacionDto>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MotivosCancelacionDto>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized, Type = null)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden, Type = null)]
-		[ProducesResponseType(StatusCodes.Status404NotFound, Type = null)]
-		public async Task<ActionResult> GetMotivosCancelacion()
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = null)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden, Type = null)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = null)]
+        public async Task<ActionResult> GetMotivosCancelacion()
         {
             try
             {
@@ -206,20 +206,20 @@ namespace ProductosBFF.Controllers
                 _logger.LogError(ioe, ioe.Message);
                 return Problem();
             }
-			catch (Exception e)
-			{
-				_logger.LogError(e, e.Message);
-				return NotFound();
-			}
-		}
+            catch (Exception e)
+            {
+                _logger.LogError(e, e.Message);
+                return NotFound();
+            }
+        }
 
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="solicitud"></param>
-		/// <returns></returns>
-		[HttpPost("EnviarDatosCesantia")]
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="solicitud"></param>
+        /// <returns></returns>
+        [HttpPost("EnviarDatosCesantia")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseBcAfilSini))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = null)]
         [ProducesResponseType(StatusCodes.Status403Forbidden, Type = null)]
@@ -379,7 +379,7 @@ namespace ProductosBFF.Controllers
             try
             {
                 var result = await _productoService.SolicitudesTrazaPadre(new TrazaPadreParam
-                    { pin_id_siniestro = idSiniestro });
+                { pin_id_siniestro = idSiniestro });
 
                 return new OkObjectResult(result);
             }
@@ -406,7 +406,7 @@ namespace ProductosBFF.Controllers
             try
             {
                 var result = await _productoService.DetalleSolicitudVC(new BodyHistorialCabecera
-                    { pin_id_siniestro = idSiniestro });
+                { pin_id_siniestro = idSiniestro });
 
                 return new OkObjectResult(result);
             }
@@ -432,7 +432,7 @@ namespace ProductosBFF.Controllers
             try
             {
                 var result = await _productoService.DetalleSolicitudCesantia(new BodyHistorialCabecera
-                    { pin_id_siniestro = idSiniestro });
+                { pin_id_siniestro = idSiniestro });
 
                 return new OkObjectResult(result);
             }
@@ -797,23 +797,23 @@ namespace ProductosBFF.Controllers
             try
             {
                 var auditoria = HttpContext.Items["IdAuditoria"].ToString();
-                
+
                 var bodyCancelarConFirma = new BodyCancelarParamDto
                 {
                     pin_codigo_bc = bodyCancelarBcParam.pin_codigo_bc,
                     pin_codigo_motivo = bodyCancelarBcParam.pin_codigo_motivo,
                     pin_folio = bodyCancelarBcParam.pin_folio,
-                    pin_firma =  auditoria
+                    pin_firma = auditoria
                 };
                 var result = await _productoService.CancelaBcCostoCero(bodyCancelarConFirma);
-                
+
                 if (result == null)
                 {
                     var notFoundObjectResult =
                         new GenericResult<CancelaBcCostoCeroResponse>(null, 500, "No se pudo cancelar el bc");
                     return new NotFoundObjectResult(notFoundObjectResult);
                 }
-                
+
                 var okObjectResult =
                     new GenericResult<CancelaBcCostoCeroResponse>(result, 200, "Se pudo cancelar el bc costo cero");
                 return new OkObjectResult(okObjectResult);
@@ -834,7 +834,7 @@ namespace ProductosBFF.Controllers
                 return NotFound();
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -849,8 +849,8 @@ namespace ProductosBFF.Controllers
         {
             try
             {
-                var result = await _productoService.ValidaBcCostoCero(folio,domiCodigo);
-                
+                var result = await _productoService.ValidaBcCostoCero(folio, domiCodigo);
+
                 return new OkObjectResult(result);
             }
             catch (ArgumentException ar)

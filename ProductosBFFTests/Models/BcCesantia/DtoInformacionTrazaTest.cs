@@ -16,7 +16,7 @@ namespace ProductosBFFTests.Models.BcCesantia
             const string expectedEnlaceBoton = "https://example.com/boton";
             const string expectedEstiloBoton = "Estilo1";
             const decimal expectedIdOrden = 12345;
-            
+
             var dtoInformacionTraza = new DtoInformacionTraza
             {
                 titulo = expectedTitulo,
@@ -28,7 +28,7 @@ namespace ProductosBFFTests.Models.BcCesantia
                 estiloBoton = expectedEstiloBoton,
                 idOrden = expectedIdOrden
             };
-            
+
             Assert.Equal(expectedTitulo, dtoInformacionTraza.titulo);
             Assert.Equal(expectedDescripcion, dtoInformacionTraza.descripcion);
             Assert.Equal(expectedFechaDescripcion, dtoInformacionTraza.fechaDescripcion);

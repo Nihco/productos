@@ -20,7 +20,7 @@
         /// Rut
         /// </summary>
         public decimal PIN_Rut { get; set; }
-        
+
         /// <summary>
         /// Ruta de carga Shira
         /// </summary>

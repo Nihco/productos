@@ -13,7 +13,7 @@ namespace ProductosBFF.Models.BCCesantia
         /// Descripcion error
         /// </summary>
         public string MessageResult { get; set; }
-        
+
         /// <summary>
         /// Id Siniestro 
         /// </summary>

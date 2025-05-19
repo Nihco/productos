@@ -51,52 +51,52 @@ namespace ProductosBFF.Domain.Parameters
         /// Descripcion BC
         /// </summary>
         public string DescripcionBc { get; set; }
-        
+
         /// <summary>
         /// Fecha Vigencia Bc
         /// </summary>
         public DateTime FechaInicioVigencia { get; set; }
-        
+
         /// <summary>
         /// Fecha Despido
         /// </summary>
         public DateTime FechaDespido { get; set; }
-        
+
         /// <summary>
         /// Fecha Finiquito
         /// </summary>
         public DateTime FechaFiniquito { get; set; }
-        
+
         /// <summary>
         /// Causal Despido
         /// </summary>
         public string CausalDespido { get; set; }
-        
+
         /// <summary>
         /// Tipo Trabajador
         /// </summary>
         public string TipoTrabajador { get; set; }
-        
+
         /// <summary>
         /// Tipo Familia
         /// </summary>
         public string TipoFamilia { get; set; }
-        
+
         /// <summary>
         /// Imagen
         /// </summary>
         public string Imagen { get; set; }
-        
+
         /// <summary>
         /// Archivo Base 64 
         /// </summary>
         public string FileBase64 { get; set; }
-        
+
         /// <summary>
         /// Token de sesion del usuario
         /// </summary>
         public string Token { get; set; }
-        
+
         /// <summary>
         /// ID Usuario
         /// </summary>

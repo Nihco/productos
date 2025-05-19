@@ -12,7 +12,7 @@ namespace ProductosBFF.Models.Accidentes
         /// <summary>
         /// Id Content recibido de Content Manager
         /// </summary>
-        public string Idcontent { get; set; }      
+        public string Idcontent { get; set; }
 
         /// <summary>
         /// Mensaje de error en caso de fallar

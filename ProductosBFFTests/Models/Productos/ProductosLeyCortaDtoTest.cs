@@ -5,7 +5,7 @@ namespace ProductosBFFTests.Models.Productos
 {
     public class ProductosLeyCortaDtoTest
     {
-      [Fact]
+        [Fact]
         public void ProductLeyCortaDto_Properties_SetAndGetCorrectly()
         {
             var expectedFolioSuscripcion = 1234567890L;
@@ -14,6 +14,7 @@ namespace ProductosBFFTests.Models.Productos
             var expectedFechaInicio = "01/01/2024";
             var expectedIncluidoPlan = "Sí";
             var expectedUsarDesde = "15/01/2024";
+            var expectedUsarHasta = "15/01/2026";
             var expectedPlazoValido = 12.5m;
             var expectedCodigoPlan = "Plan123";
             var expectedPlazoUso = 6.5m;
@@ -25,7 +26,7 @@ namespace ProductosBFFTests.Models.Productos
             var expectedUrlResumen = "http://example.com/resumen";
             var expectedUrlCondiciones = "http://example.com/condiciones";
             var expectedValueAprox = "$0,00";
-            
+
             var dto = new ProductLeyCortaDto
             {
                 folio_suscripcion = expectedFolioSuscripcion,
@@ -34,6 +35,7 @@ namespace ProductosBFFTests.Models.Productos
                 fecha_inicio = expectedFechaInicio,
                 incluido_plan = expectedIncluidoPlan,
                 usar_desde = expectedUsarDesde,
+                usar_hasta = expectedUsarHasta,
                 plazo_valido = expectedPlazoValido,
                 codigo_plan = expectedCodigoPlan,
                 plazo_uso = expectedPlazoUso,
@@ -46,13 +48,14 @@ namespace ProductosBFFTests.Models.Productos
                 url_condiciones = expectedUrlCondiciones,
                 valueAprox = expectedValueAprox
             };
-            
+
             Assert.Equal(expectedFolioSuscripcion, dto.folio_suscripcion);
             Assert.Equal(expectedId, dto.id);
             Assert.Equal(expectedName, dto.name);
             Assert.Equal(expectedFechaInicio, dto.fecha_inicio);
             Assert.Equal(expectedIncluidoPlan, dto.incluido_plan);
             Assert.Equal(expectedUsarDesde, dto.usar_desde);
+            Assert.Equal(expectedUsarHasta, dto.usar_hasta);
             Assert.Equal(expectedPlazoValido, dto.plazo_valido);
             Assert.Equal(expectedCodigoPlan, dto.codigo_plan);
             Assert.Equal(expectedPlazoUso, dto.plazo_uso);

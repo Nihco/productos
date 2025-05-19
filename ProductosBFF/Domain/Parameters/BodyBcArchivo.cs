@@ -5,12 +5,12 @@ namespace ProductosBFF.Domain.Parameters
     /// </summary>
     public class BodyBcArchivo
     {
-        
+
         /// <summary>
         /// Id Solicitud
         /// </summary>
         public string PinIdSiniestro { get; set; }
-        
+
         /// <summary>
         /// ID parametro documento
         /// </summary>

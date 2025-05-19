@@ -36,7 +36,7 @@ namespace ProductosBFF.Domain.Productos
         /// fecha usar desde producto
         /// </summary>
         public DateTime usar_desde { get; set; }
-        
+
         /// <summary>
         /// fecha usar hasta producto
         /// </summary>

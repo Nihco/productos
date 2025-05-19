@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -5,15 +6,14 @@ using ProductosBFF.Controllers;
 using ProductosBFF.Domain.Parameters;
 using ProductosBFF.Exceptions;
 using ProductosBFF.Interfaces;
+using ProductosBFF.Models.Accidentes;
+using ProductosBFF.Models.BCCesantia;
 using ProductosBFF.Models.Causales;
 using ProductosBFF.Models.Commons;
 using ProductosBFF.Models.Productos;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using ProductosBFF.Models.Accidentes;
-using ProductosBFF.Models.BCCesantia;
 using Xunit;
 
 namespace ProductosBFFTests.ControllerTests
@@ -242,7 +242,7 @@ namespace ProductosBFFTests.ControllerTests
             Assert.IsType<NotFoundObjectResult>(result);
         }
 
-       
+
 
         [Fact]
         public async Task GetCausalesDespidos()
@@ -289,10 +289,10 @@ namespace ProductosBFFTests.ControllerTests
         public async Task Get_Responde_Ok_True()
         {
             _productoServiceMock.Setup(x => x.GetContinuidadProductoService(It.IsAny<ContinuidadProducto>())).Returns(Task.FromResult(true));
-            
+
             var resp = await _productsController.Get(111);
             var respObj = resp as OkObjectResult;
-            
+
             Assert.IsType<OkObjectResult>(resp);
             Assert.Equal(200, respObj.StatusCode);
             Assert.True((respObj.Value as GenericResult<bool>).Result);
@@ -336,10 +336,10 @@ namespace ProductosBFFTests.ControllerTests
         public async Task RegistraSolicitudContinuidadCesantia_Responde_Ok()
         {
             _productoServiceMock.Setup(x => x.RegistraSolicitudContinuidadCesantia(It.IsAny<BodySolicitudActivacion>())).Returns(Task.FromResult(33));
-            
+
             var resp = await _productsController.RegistraSolicitudContinuidadCesantia(_bodySolicitudActivacion);
             var respObj = resp as OkObjectResult;
-            
+
             Assert.IsType<OkObjectResult>(resp);
             Assert.Equal(200, respObj.StatusCode);
             Assert.Equal(33, respObj.Value);
@@ -379,7 +379,7 @@ namespace ProductosBFFTests.ControllerTests
             Assert.Equal("Error al cargar archivo: Error al consumir el servicio REST", respObj.Value);
             _productoServiceMock.VerifyAll();
         }
-        
+
         [Fact]
         public async Task HistorialSolicitudes_Returns_Ok()
         {
@@ -387,14 +387,14 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(x => x.HistorialSolicitudes(It.IsAny<BodyHistorialSolicitudes>()))
                 .ReturnsAsync(historialSolicitudes);
-            
+
             var result = await _productsController.HistorialSolicitudes(123);
-           
+
             Assert.NotNull(result);
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.IsType<List<DtoHistorialSolicitudes>>(okResult.Value);
         }
-        
+
         [Fact]
         public async Task DetalleSolicitudCesantia_Returns_Ok()
         {
@@ -402,14 +402,14 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(x => x.DetalleSolicitudCesantia(It.IsAny<BodyHistorialCabecera>()))
                 .ReturnsAsync(detalleSolicitudCesantia);
-          
+
             var result = await _productsController.DetalleSolicitudCesantia(123);
-          
+
             Assert.NotNull(result);
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.IsType<List<DtoDetalleSolicitudCesantia>>(okResult.Value);
         }
-        
+
         [Fact]
         public async Task DetalleSolicitudVC_Returns_Ok()
         {
@@ -417,14 +417,14 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(x => x.DetalleSolicitudVC(It.IsAny<BodyHistorialCabecera>()))
                 .ReturnsAsync(detalleSolicitudVc);
-            
+
             var result = await _productsController.DetalleSolicitudVC(123);
-            
+
             Assert.NotNull(result);
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.IsType<List<DtoDetalleSolicitudVC>>(okResult.Value);
         }
-        
+
         [Fact]
         public async Task ProcesoSolicitud_Returns_Ok()
         {
@@ -432,80 +432,80 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(x => x.SolicitudesTrazaPadre(It.IsAny<TrazaPadreParam>()))
                 .ReturnsAsync(traZaPadreDtoList);
-            
+
             var result = await _productsController.ProcesoSolicitud(123);
-           
+
             Assert.NotNull(result);
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.IsType<DtoResponseTrazaPadre>(okResult.Value);
         }
-        
+
         [Fact]
         public async Task EnviarDatosCesantia_ShouldReturnOk_WhenDataIsSentSuccessfully()
         {
             var expectedResponse = new ResponseBcAfilSini();
             _productoServiceMock.Setup(service => service.EnviarDatosCesantia(It.IsAny<BodySolicitudActivacion>()))
                 .ReturnsAsync(expectedResponse);
-            
+
             var result = await _productsController.EnviarDatosCesantia(new BodySolicitudActivacion());
-            
+
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(expectedResponse, okResult.Value);
         }
-        
+
         [Fact]
         public async Task EnviarDatosCesantia_ShouldReturnNotFound_WhenExceptionIsThrown()
         {
             _productoServiceMock.Setup(service => service.EnviarDatosCesantia(It.IsAny<BodySolicitudActivacion>()))
                 .Throws(new Exception());
-            
+
             var result = await _productsController.EnviarDatosCesantia(new BodySolicitudActivacion());
-            
+
             Assert.IsType<NotFoundResult>(result);
         }
-        
+
         [Fact]
         public async Task PostEnvioCorreo_Ok()
         {
             var envioCorreo = new EnvioCorreo();
             var expectedResponse = new ResponseEnvioCorreo();
-    
+
             _productoServiceMock.Setup(service => service.EnviarCorreo(envioCorreo))
                 .ReturnsAsync(expectedResponse);
-            
+
             var result = await _productsController.PostEnvioCorreo(envioCorreo);
-            
+
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<ResponseEnvioCorreo>>(okResult.Value);
             Assert.Equal(expectedResponse, returnValue.Result);
         }
-        
+
         [Fact]
         public async Task PostGenerarFun4_Ok()
         {
-            var datosFun4 = new DtoFun4(); 
-            var expectedResponse = new Fun4 { Codigo = 0 }; 
+            var datosFun4 = new DtoFun4();
+            var expectedResponse = new Fun4 { Codigo = 0 };
 
             _productoServiceMock.Setup(service => service.EnviarFun4(datosFun4))
                 .ReturnsAsync(expectedResponse);
-            
+
             var result = await _productsController.PostGenerarFun4(datosFun4);
-            
+
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(expectedResponse.Codigo, okResult.Value);
         }
-        
+
         [Fact]
         public async Task PostGenerarFun4_NotFound()
         {
-            var datosFun4 = new DtoFun4(); 
-            var expectedResponse = new Fun4 { Codigo = 1 }; 
+            var datosFun4 = new DtoFun4();
+            var expectedResponse = new Fun4 { Codigo = 1 };
 
             _productoServiceMock.Setup(service => service.EnviarFun4(datosFun4))
                 .ReturnsAsync(expectedResponse);
-           
+
             var result = await _productsController.PostGenerarFun4(datosFun4);
-            
+
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
             Assert.Equal(expectedResponse.Codigo, notFoundResult.Value);
         }
@@ -517,119 +517,119 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(service => service.EnviarFun4(datosFun4))
                 .ThrowsAsync(new Exception("Error al generar Fun4"));
-            
+
             var result = await _productsController.PostGenerarFun4(datosFun4);
-            
+
             Assert.IsType<NotFoundResult>(result);
         }
-        
+
         [Fact]
         public async Task ConsultaTipoAccidente_Ok()
         {
-            var expectedTiposAccidente = new List<TipoAccidenteDto> 
-            { 
-                new(), 
-                new() 
+            var expectedTiposAccidente = new List<TipoAccidenteDto>
+            {
+                new(),
+                new()
             };
 
             _productoServiceMock.Setup(service => service.ObtenerTipoAccidente())
                 .ReturnsAsync(expectedTiposAccidente);
-            
+
             var result = await _productsController.ConsultaTipoAccidente();
-            
+
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<List<TipoAccidenteDto>>>(okResult.Value);
             Assert.Equal(expectedTiposAccidente, returnValue.Result);
         }
-        
+
         [Fact]
         public async Task ConsultaTipoAccidente_NotFound()
         {
             _productoServiceMock.Setup(service => service.ObtenerTipoAccidente())
                 .ReturnsAsync((List<TipoAccidenteDto>)null);
-            
+
             var result = await _productsController.ConsultaTipoAccidente();
-            
+
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<List<TipoAccidenteDto>>>(notFoundResult.Value);
             Assert.Null(returnValue.Result);
         }
-        
+
         [Fact]
         public async Task ConsultaTipoAccidente_Exception()
         {
             _productoServiceMock.Setup(service => service.ObtenerTipoAccidente())
                 .ThrowsAsync(new Exception("Error al consultar tipos de accidente"));
-            
+
             var result = await _productsController.ConsultaTipoAccidente();
-            
+
             Assert.IsType<NotFoundResult>(result);
         }
-        
+
         [Fact]
         public async Task DocumentosAccidente_Ok()
         {
             var documentosAccidente = new BodyDocumentosAccidente();
-            var expectedDocumentos = new List<DocumentosAccidenteDto> 
-            { 
-                new(), 
-                new() 
+            var expectedDocumentos = new List<DocumentosAccidenteDto>
+            {
+                new(),
+                new()
             };
 
             _productoServiceMock.Setup(service => service.ObtenerDocumentosAccidente(documentosAccidente))
                 .ReturnsAsync(expectedDocumentos);
-            
+
             var result = await _productsController.DocumentosAccidente(documentosAccidente);
-            
+
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<List<DocumentosAccidenteDto>>>(okResult.Value);
             Assert.Equal(expectedDocumentos, returnValue.Result);
         }
-        
+
         [Fact]
         public async Task DocumentosAccidente_NotFound()
         {
-            var documentosAccidente = new BodyDocumentosAccidente(); 
+            var documentosAccidente = new BodyDocumentosAccidente();
 
             _productoServiceMock.Setup(service => service.ObtenerDocumentosAccidente(documentosAccidente))
                 .ReturnsAsync((List<DocumentosAccidenteDto>)null);
-            
+
             var result = await _productsController.DocumentosAccidente(documentosAccidente);
-            
+
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<List<DocumentosAccidenteDto>>>(notFoundResult.Value);
             Assert.Null(returnValue.Result);
         }
-        
+
         [Fact]
         public async Task DocumentosAccidente_Exception()
         {
-            var documentosAccidente = new BodyDocumentosAccidente(); 
+            var documentosAccidente = new BodyDocumentosAccidente();
 
             _productoServiceMock.Setup(service => service.ObtenerDocumentosAccidente(documentosAccidente))
                 .ThrowsAsync(new Exception("Error al consultar documentos de accidente"));
-            
+
             var result = await _productsController.DocumentosAccidente(documentosAccidente);
-            
+
             Assert.IsType<NotFoundResult>(result);
         }
-        
+
         [Fact]
         public async Task IngresarArchivoAccidente_Ok()
         {
-            var ingresarArchivoAccidente = new BodyIngresarArchivoAccidente(); 
-            var expectedResponse = new IngresarArchivoAccidenteDto(); 
+            var ingresarArchivoAccidente = new BodyIngresarArchivoAccidente();
+            var expectedResponse = new IngresarArchivoAccidenteDto();
 
             _productoServiceMock.Setup(service => service.IngresarArchivoAccidente(ingresarArchivoAccidente))
                 .ReturnsAsync(expectedResponse);
-            
+
             var result = await _productsController.IngresarArchivoAccidente(ingresarArchivoAccidente);
-            
+
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<IngresarArchivoAccidenteDto>>(okResult.Value);
             Assert.Equal(expectedResponse, returnValue.Result);
         }
-        
+
         [Fact]
         public async Task IngresarArchivoAccidente_NotFound()
         {
@@ -637,14 +637,14 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(service => service.IngresarArchivoAccidente(ingresarArchivoAccidente))
                 .ReturnsAsync((IngresarArchivoAccidenteDto)null);
-           
+
             var result = await _productsController.IngresarArchivoAccidente(ingresarArchivoAccidente);
-            
+
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<IngresarArchivoAccidenteDto>>(notFoundResult.Value);
             Assert.Null(returnValue.Result);
         }
-        
+
         [Fact]
         public async Task IngresarArchivoAccidente_Exception()
         {
@@ -652,28 +652,28 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(service => service.IngresarArchivoAccidente(ingresarArchivoAccidente))
                 .ThrowsAsync(new Exception("Error al ingresar archivo accidente"));
-            
+
             var result = await _productsController.IngresarArchivoAccidente(ingresarArchivoAccidente);
-            
+
             Assert.IsType<NotFoundResult>(result);
         }
-        
+
         [Fact]
         public async Task IngresarAccidente_Ok()
         {
-            var ingresarAccidente = new BodyIngresarAccidente(); 
-            var expectedResponse = new IngresarAccidenteDto(); 
+            var ingresarAccidente = new BodyIngresarAccidente();
+            var expectedResponse = new IngresarAccidenteDto();
 
             _productoServiceMock.Setup(service => service.IngresarAccidente(ingresarAccidente))
                 .ReturnsAsync(expectedResponse);
-            
+
             var result = await _productsController.IngresarAccidente(ingresarAccidente);
 
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<IngresarAccidenteDto>>(okResult.Value);
             Assert.Equal(expectedResponse, returnValue.Result);
         }
-        
+
         [Fact]
         public async Task IngresarAccidente_NotFound()
         {
@@ -681,9 +681,9 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(service => service.IngresarAccidente(ingresarAccidente))
                 .ReturnsAsync((IngresarAccidenteDto)null);
-            
+
             var result = await _productsController.IngresarAccidente(ingresarAccidente);
-            
+
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<IngresarAccidenteDto>>(notFoundResult.Value);
             Assert.Null(returnValue.Result);
@@ -695,28 +695,28 @@ namespace ProductosBFFTests.ControllerTests
             var ingresarAccidente = new BodyIngresarAccidente();
 
             _productoServiceMock.Setup(service => service.IngresarAccidente(ingresarAccidente))
-                .ThrowsAsync(new Exception("Error al ingresar accidente")); 
+                .ThrowsAsync(new Exception("Error al ingresar accidente"));
             var result = await _productsController.IngresarAccidente(ingresarAccidente);
 
             Assert.IsType<NotFoundResult>(result);
         }
-        
+
         [Fact]
         public async Task CargaArchivosShira_Ok()
         {
-            var cargarArchivoShira = new BodyCargarArchivoShira(); 
-            var expectedResponse = new CargarArchivoShiraDto(); 
+            var cargarArchivoShira = new BodyCargarArchivoShira();
+            var expectedResponse = new CargarArchivoShiraDto();
 
             _productoServiceMock.Setup(service => service.CargaArchivosShira(cargarArchivoShira))
                 .ReturnsAsync(expectedResponse);
-            
+
             var result = await _productsController.CargaArchivosShira(cargarArchivoShira);
-           
+
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<CargarArchivoShiraDto>>(okResult.Value);
             Assert.Equal(expectedResponse, returnValue.Result);
         }
-        
+
         [Fact]
         public async Task CargaArchivosShira_NotFound()
         {
@@ -724,14 +724,14 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(service => service.CargaArchivosShira(cargarArchivoShira))
                 .ReturnsAsync((CargarArchivoShiraDto)null);
-            
+
             var result = await _productsController.CargaArchivosShira(cargarArchivoShira);
-            
+
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<CargarArchivoShiraDto>>(notFoundResult.Value);
             Assert.Null(returnValue.Result);
         }
-        
+
         [Fact]
         public async Task CargaArchivosShira_Exception()
         {
@@ -739,23 +739,23 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(service => service.CargaArchivosShira(cargarArchivoShira))
                 .ThrowsAsync(new Exception("Error al cargar archivo a Shira"));
-            
+
             var result = await _productsController.CargaArchivosShira(cargarArchivoShira);
-            
+
             Assert.IsType<NotFoundResult>(result);
         }
-        
+
         [Fact]
         public async Task CargaArchivosContent_Ok()
         {
-            var cargarArchivoContent = new BodyCargarArchivoContent(); 
+            var cargarArchivoContent = new BodyCargarArchivoContent();
             var expectedResponse = new CargarArchivoContentDto();
 
             _productoServiceMock.Setup(service => service.CargaArchivosContent(cargarArchivoContent))
                 .ReturnsAsync(expectedResponse);
-            
+
             var result = await _productsController.CargaArchivosContent(cargarArchivoContent);
-            
+
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<CargarArchivoContentDto>>(okResult.Value);
             Assert.Equal(expectedResponse, returnValue.Result);
@@ -768,9 +768,9 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(service => service.CargaArchivosContent(cargarArchivoContent))
                 .ReturnsAsync((CargarArchivoContentDto)null);
-            
+
             var result = await _productsController.CargaArchivosContent(cargarArchivoContent);
-            
+
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<CargarArchivoContentDto>>(notFoundResult.Value);
             Assert.Null(returnValue.Result);
@@ -783,12 +783,12 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(service => service.CargaArchivosContent(cargarArchivoContent))
                 .ThrowsAsync(new Exception("Error al cargar archivo a Content"));
-            
+
             var result = await _productsController.CargaArchivosContent(cargarArchivoContent);
-            
+
             Assert.IsType<NotFoundResult>(result);
         }
-        
+
         [Fact]
         public async Task GetProductosLeyCorta_Ok()
         {
@@ -799,16 +799,16 @@ namespace ProductosBFFTests.ControllerTests
             };
             _productoServiceMock.Setup(service => service.GetProductosLeyCorta(It.IsAny<decimal>()))
                 .ReturnsAsync(mockProducts);
-            
+
             var result = await _productsController.GetProductosLeyCorta(12345678m);
-            
+
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<List<ProductLeyCortaDto>>>(okResult.Value);
             Assert.Equal(StatusCodes.Status200OK, returnValue.Response.StatusCode);
             Assert.Equal(mockProducts, returnValue.Result);
             Assert.True(returnValue.Response.SuccessfulOperation);
         }
-        
+
         [Fact]
         public async Task GetProductosLeyCorta_Exception()
         {
@@ -844,16 +844,16 @@ namespace ProductosBFFTests.ControllerTests
 
             _productoServiceMock.Setup(service => service.ObtenerCausalAccidente(It.IsAny<ParamTipoAccidente>()))
                 .ReturnsAsync(mockCausales);
-            
+
             var result = await _productsController.ConsultaCausaAccidente(123);
-            
+
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<GenericResult<List<CausalAccidenteDto>>>(okResult.Value);
             Assert.Equal(StatusCodes.Status200OK, returnValue.Response.StatusCode);
             Assert.Equal(mockCausales, returnValue.Result);
             Assert.True(returnValue.Response.SuccessfulOperation);
         }
-        
+
         [Fact]
         public async Task ObtenerDiagnosticoVc_ReturnsOkObjectResult_WhenDiagnosticoIsFound()
         {
@@ -884,6 +884,7 @@ namespace ProductosBFFTests.ControllerTests
             Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
             Assert.Equal(mockDiagnostico, returnValue);
         }
+
         
         [Fact]
         public async Task GetMotivosCancelacion_Ok()

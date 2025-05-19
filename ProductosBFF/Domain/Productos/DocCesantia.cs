@@ -9,13 +9,13 @@
         /// Objeto resultado content manager
         /// </summary>
         public Result Result { get; set; }
-        
+
         /// <summary>
         /// Mensage de estado de la operacion
         /// </summary>
         public bool SuccessfulOperation { get; set; }
     }
-    
+
     /// <summary>
     /// Clase
     /// </summary>
@@ -25,12 +25,12 @@
         /// Id Content recibido de Content Manager
         /// </summary>
         public string Idcontent { get; set; }
-        
+
         /// <summary>
         /// Estado de carga
         /// </summary>
         public string EstadoCarga { get; set; }
-        
+
         /// <summary>
         /// Mensaje de error en caso de fallar
         /// </summary>

@@ -12,37 +12,37 @@ namespace ProductosBFF.Models.BCCesantia
         /// Tipo Solicitud
         /// </summary>
         public string tipoSolicitud { get; set; }
-        
+
         /// <summary>
         /// BC
         /// </summary>
         public string productoAdicional { get; set; }
-        
+
         /// <summary>
         /// Fecha de la solicitud
         /// </summary>
         public string fechaSolicitud { get; set; }
-        
+
         /// <summary>
         /// Id de la solicitud
         /// </summary>
         public int id { get; set; }
-        
+
         /// <summary>
         /// Estado de la solicitud
         /// </summary>
         public string estado { get; set; }
-        
+
         /// <summary>
         /// Color que va retornar
         /// </summary>
         public string color { get; set; }
-        
+
         /// <summary>
         /// Id Padre
         /// </summary>
         public int idRelacionado { get; set; }
-        
+
         /// <summary>
         /// Tipo de la solicitud
         /// </summary>

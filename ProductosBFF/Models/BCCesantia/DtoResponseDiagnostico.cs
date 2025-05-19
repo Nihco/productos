@@ -11,12 +11,12 @@ namespace ProductosBFF.Models.BCCesantia
         /// Id Siniestro
         /// </summary>
         public decimal id_siniestro { get; set; }
-        
+
         /// <summary>
         /// Descripcion Bc
         /// </summary>
         public string descripcion_bc { get; set; }
-        
+
         /// <summary>
         /// Tipo Accidente
         /// </summary>

@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using ProductosBFF.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using ProductosBFF.Interfaces;
 
 namespace ProductosBFF.Utils
 {
@@ -27,7 +27,7 @@ namespace ProductosBFF.Utils
         /// <param name="httpClientFactory"></param>
         /// <param name="config"></param>
         /// <param name="logger"></param>
-        public HttpClientService(IHttpClientFactory httpClientFactory,IConfiguration config, ILogger<HttpClientService> logger)
+        public HttpClientService(IHttpClientFactory httpClientFactory, IConfiguration config, ILogger<HttpClientService> logger)
         {
             _httpClientFactory = httpClientFactory;
             _config = config;
@@ -91,7 +91,7 @@ namespace ProductosBFF.Utils
                 throw new InvalidOperationException($"Error inesperado: {ex.Message}", ex);
             }
         }
-        
+
         /// <summary>
         /// Método para agregar headers a una solicitud HTTP.
         /// </summary>
@@ -99,14 +99,14 @@ namespace ProductosBFF.Utils
         /// <param name="headers">Los headers a agregar.</param>
         private void AddHeaders(HttpRequestMessage request, Dictionary<string, string> headers)
         {
-            request.Headers.Add(_config["PRODUCTO_HEADER_NAME"],_config["PRODUCTO_HEADER_VALUE"]);
+            request.Headers.Add(_config["PRODUCTO_HEADER_NAME"], _config["PRODUCTO_HEADER_VALUE"]);
             if (headers == null) return;
             foreach (var header in headers)
             {
                 request.Headers.Add(header.Key, header.Value);
             }
         }
-        
+
         private static Dictionary<string, string> ConvertToQueryParams(object obj)
         {
             var queryParams = new Dictionary<string, string>();
@@ -124,7 +124,7 @@ namespace ProductosBFF.Utils
 
             return queryParams;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -138,7 +138,7 @@ namespace ProductosBFF.Utils
         {
             return await SendRequestAsync<T>(url, HttpMethod.Get, queryParams, null, headers);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -153,7 +153,7 @@ namespace ProductosBFF.Utils
         {
             return SendRequestAsync<T>(url, HttpMethod.Post, queryParams, body, headers);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

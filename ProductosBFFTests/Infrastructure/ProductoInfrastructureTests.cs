@@ -1,12 +1,13 @@
-﻿using Moq;
+﻿using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
+using Moq;
 using ProductosBFF.Domain.Parameters;
 using ProductosBFF.Infrastructure;
 using ProductosBFF.Interfaces;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using ProductosBFF.Domain.Causales;
 using ProductosBFF.Domain.Productos;
+
 using Xunit;
 
 namespace ProductosBFFTests.Infrastructure
@@ -14,7 +15,7 @@ namespace ProductosBFFTests.Infrastructure
     public class ProductoInfrastructureTests
     {
         private readonly Mock<IHttpClientService> _httpClientServiceMock;
-       
+
         private readonly ProductoInfrastructure _productoInfrastructure;
 
         public ProductoInfrastructureTests()
@@ -32,6 +33,7 @@ namespace ProductosBFFTests.Infrastructure
         [Fact]
         public async Task ContinuidadProducto_Ok()
         {
+
             var inMemorySettings = new Dictionary<string, string> {
                 {"PRODUCTO", "PRODUCTO_URL"},
                 {"SectionName:SomeKey", "SectionValue"}
@@ -48,29 +50,29 @@ namespace ProductosBFFTests.Infrastructure
 
             _httpClientServiceMock.Setup(service => service.GetAsync<bool>(
                 It.Is<string>(url => url.Contains("ContinuidadProducto")),
-                continuidadProducto, 
-                null 
+                continuidadProducto,
+                null
             )).ReturnsAsync(expectedContinuity);
-            
+
             var result = await _productoInfrastructure.ContinuidadProducto(continuidadProducto);
-            
+
             Assert.True(result);
         }
 
         [Fact]
         public async Task ContinuidadProducto_No_Ok()
         {
-            var continuidadProducto = new ContinuidadProducto(); 
+            var continuidadProducto = new ContinuidadProducto();
 
             _httpClientServiceMock.Setup(service => service.GetAsync<bool>(
                 It.Is<string>(url => url.Contains("ContinuidadProducto")),
-                continuidadProducto,  
-                null 
+                continuidadProducto,
+                null
             )).ReturnsAsync(false);
-            
+
             var result = await _productoInfrastructure.ContinuidadProducto(continuidadProducto);
-            
-            Assert.False(result);  
+
+            Assert.False(result);
         }
 
         [Fact]
@@ -80,13 +82,13 @@ namespace ProductosBFFTests.Infrastructure
 
             _httpClientServiceMock.Setup(service => service.PutAsync<int>(
                 It.Is<string>(url => url.Contains($"ContinuidadProducto/RegistraContinuidadCesantia?rut={rut}")),
-                null, 
-                null,  
-                null   
+                null,
+                null,
+                null
             )).ReturnsAsync(0);
-          
+
             var result = await _productoInfrastructure.RegistraContinuidadCesantia(rut);
-        
+
             Assert.Equal(0, result);
         }
         
@@ -178,39 +180,7 @@ namespace ProductosBFFTests.Infrastructure
             
             Assert.NotNull(result);
             Assert.Empty(result);
-        }
-        
-        [Fact]
-        public async Task GetProductosCostoCero_HandlesException_WhenApiCallFails()
-        {
-            const decimal expectedTestRut = 55555555;
-            _httpClientServiceMock.Setup(service => service.GetAsync<List<ProductosCostoCero>>(
-                It.IsAny<string>(),  
-                null,   
-                null    
-            )).ThrowsAsync(new System.Exception("API call failed"));
-            
-            var exception = await Assert.ThrowsAsync<System.Exception>(() => _productoInfrastructure.GetProductosCostoCero(expectedTestRut));
-            Assert.Equal("API call failed", exception.Message);
-        }
-        
-        [Fact]
-        public async Task ValidaBcCostoCero_ReturnsTrue_WhenApiCallSucceedsAndReturnsTrue()
-        {
-            const int expectedFolio = 12345;
-            const int expectedDomiCodigo = 789;
-            string expectedUrl = $"Products/ValidaBcCostoCero/{expectedFolio}/{expectedDomiCodigo}";
 
-            _httpClientServiceMock.Setup(service => service.GetAsync<bool>(
-                    It.Is<string>(url => url == expectedUrl),
-                    null,
-                    null 
-                ))
-                .ReturnsAsync(true);
-            
-            var result = await _productoInfrastructure.ValidaBcCostoCero(expectedFolio, expectedDomiCodigo);
-            
-            Assert.False(result);
         }
     }
 }

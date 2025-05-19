@@ -1,0 +1,18 @@
+{
+    "stryker-config": {
+        "ignore-methods": [
+            "_logger*",
+			"*LogError*",
+			"*AddInParameter*",
+			"*AddOutCursor*",
+			"*AddOutParameter*",
+			"*Exception.ctor",
+			"*ExecuteNonQuery*",
+			"*ExecuteReader*"
+        ],
+		"ignore-mutations": [
+				"linq.FirstOrDefault"
+			],
+		"mutate": ["!**/Startup.cs","!**/Program.cs"]
+    }
+}

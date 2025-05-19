@@ -1,37 +1,37 @@
-﻿using System;
-using System.Net;
-using System.Net.Sockets;
-using AutoMapper;
+﻿using AutoMapper;
 using ProductosBFF.Domain.Parameters;
 using ProductosBFF.Mappings;
+using System;
+using System.Net;
+using System.Net.Sockets;
 
 namespace ProductosBFF.Models.BCCesantia
 {
     /// <summary>
     /// Clase Fun 4
     /// </summary>
-    public class DtoFun4: IMapFrom<BodySolicitudActivacion>
+    public class DtoFun4 : IMapFrom<BodySolicitudActivacion>
     {
         /// <summary>
         /// Folio Suscripcion del usuario
         /// </summary>
         public int Folio { get; set; }
-        
+
         /// <summary>
         /// Token de sesion del usuario
         /// </summary>
         public string Token { get; set; }
-    
+
         /// <summary>
         /// Id de usuario
         /// </summary>
         public string Id { get; set; }
-        
+
         /// <summary>
         /// Fecha de Autorizacion del usuario 
         /// </summary>
         public DateTime Fecha { get; set; }
-        
+
         /// <summary>
         /// Ip de cliente
         /// </summary>
@@ -50,7 +50,7 @@ namespace ProductosBFF.Models.BCCesantia
                 .ForMember(dest => dest.Folio, opt => opt.MapFrom(src => src.FolioAfil))
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
         }
-        
+
         /// <summary>
         /// Metodo que trae la ip del servidor
         /// </summary>

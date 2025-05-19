@@ -30,7 +30,7 @@ namespace ProductosBFF.Exceptions
         /// <param name="info"></param>
         /// <param name="context"></param>
         protected ContentManagerException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -42,7 +42,7 @@ namespace ProductosBFF.Exceptions
             {
                 throw new ArgumentNullException(nameof(info));
             }
-            
+
             base.GetObjectData(info, context);
         }
 

@@ -16,12 +16,16 @@
         /// <summary>
         /// 
         /// </summary>
-        FAMILIA_PROTEGIDA=3,
+        FAMILIA_PROTEGIDA = 3,
         /// <summary>
         /// 
         /// </summary>
-        URGENCIA=4,
-        
+        URGENCIA = 4,
+
+        /// <summary>
+        /// 
+        /// </summary>
+
         CAEC = 5
     }
 }

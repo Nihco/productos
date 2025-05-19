@@ -5,7 +5,7 @@ namespace ProductosBFF.Models.Causales
     /// <summary>
     /// Clase
     /// </summary>
-    public class CausalesDto: IMapFrom<Domain.Causales.Causales>
+    public class CausalesDto : IMapFrom<Domain.Causales.Causales>
     {
         /// <summary>
         /// 
