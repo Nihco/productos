@@ -1,0 +1,166 @@
+# Creación de cuenta de Servicio de Kubernetes que asume el POD
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: productos-bff
+automountServiceAccountToken: false
+---
+# Configuración de despliegue
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productos-bff
+spec:
+  selector:
+    matchLabels:
+      app: productos-bff
+  # indica al controlador que ejecute 1 pods
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+  # Definicion del POD mediante Template
+  template:
+    metadata:
+      labels:
+        # importantes cuando se hace match desde un servicio
+        # otros ejemplos:
+        # version: v1
+        app: productos-bff
+    spec:
+      serviceAccount: productos-bff
+      containers:
+      - name: productos-bff
+      # cambiar por nombre del repositorio de imágenes
+        image: #{AWS_REPOSITORY}#/#{IMAGE_NAME}#:#{Build.SourceVersion}#
+        imagePullPolicy: IfNotPresent
+        ports:
+        # puerto expuesto en el POD
+        - containerPort: 5000
+        env:
+        - name: PRODUCTO_HEADER_NAME
+          value: "#{PRODUCTO_HEADER_NAME}#"
+        - name: PRODUCTO_HEADER_VALUE
+          value: "#{PRODUCTO_HEADER_VALUE}#"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "#{ENVIRONMENT}#"
+        - name: PACTADO_HEADER_NAME
+          value: "#{PACTADO_HEADER_NAME}#"
+        - name: PACTADO_HEADER_VALUE
+          value: "#{PACTADO_HEADER_VALUE}#"
+        # Prueba para saber si el servicio es saludable
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 15
+        # Recursos de memoria y CPU
+        # Ajustar a la necesidad de cada contenedor
+        # https://kubernetes.io/es/docs/concepts/configuration/manage-resources-containers/#unidades-de-recursos-en-kubernetes
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "384Mi"
+            cpu: "200m"
+        lifecycle:
+          preStop:
+            exec:
+              command: [ "/bin/sleep", "20" ]
+---
+# Service es un balanceador de carga a nivel de red (tipo 4)
+apiVersion: v1
+kind: Service
+metadata:
+  # nombre del servicio
+  name: productos-bff-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+  # puerto expuesto por el servicio
+    port: 8080
+  # puerto expuesto en el POD
+    targetPort: 5000
+  selector:
+    app: productos-bff
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: productos-bff-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    # Enable file upload up to 5 MB
+    # nginx.ingress.kubernetes.io/proxy-body-size: 6m
+    # nginx.ingress.kubernetes.io/limit-connections: "10"
+    # nginx.ingress.kubernetes.io/limit-rpm: "6"
+    # nginx.ingress.kubernetes.io/limit-burst-multiplier: "2"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "*.consalud.cl"
+      http:
+        paths:
+          - path: /api/Products
+            pathType: Prefix
+            backend:
+              service:
+                # nombre del servicio
+                name: productos-bff-service
+                port:
+                # puerto expuesto por el servicio
+                  number: 8080          
+          - path: /api/Prestadores
+            pathType: Prefix
+            backend:
+              service:
+                # nombre del servicio
+                name: productos-bff-service
+                port:
+                # puerto expuesto por el servicio
+                  number: 8080                            
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: productos-bff
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: productos-bff
+  minReplicas: #{MIN_REPLICAS}#
+  maxReplicas: #{MAX_REPLICAS}#
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 60
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 85
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 180
+    scaleUp:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Pods
+        value: 2
+        periodSeconds: 60

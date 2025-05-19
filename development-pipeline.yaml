@@ -1,0 +1,93 @@
+trigger:
+  branches:
+    include:
+    - feature/*
+    - releases/*
+  paths:
+    exclude:
+    - README.md
+    - .gitignore
+variables:
+- group: productosBffGlobalesNVirgina
+
+stages:
+- stage: Analisis
+  displayName: 'Análisis de código'
+  jobs:
+    - job: SonarQubeAnalisis
+      displayName: 'Análisis de SonarQube'
+      pool: Default
+      continueOnError: false
+      steps:
+        - task: SonarQubePrepare@4
+          displayName: "Preparación de análisis"
+          inputs:
+            SonarQube: 'SonarQube-NSD - Login-NSD - Productos'
+            scannerMode: 'MSBuild'
+            projectKey: '$(Build.Repository.ID)'
+            projectName: '$(System.TeamProject)-$(Build.Repository.Name)'
+            projectVersion: '$(Build.BuildNumber)'
+            extraProperties: 'sonar.cs.vscoveragexml.reportsPaths=$(Agent.TempDirectory)/**/*.coveragexml'
+        - task: PowerShell@2
+          displayName: "Engañando a SQ"
+          inputs:
+            targetType: 'inline'
+            script: |
+              $params = "$env:SONARQUBE_SCANNER_PARAMS" -replace '"sonar.branch.name":"[\w,/,-]*"\,?' -replace '"sonar\.pullrequest\.[\w\.]+":"[\w/,\- :\.]*"\,?'
+              Write-Host "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$params"
+        - task: DotNetCoreCLI@2
+          displayName: 'Restauración NuGet'
+          inputs:
+            command: 'restore'
+        - task: DotNetCoreCLI@2
+          displayName: 'Compilación'
+          inputs:
+            command: 'build'
+        - task: DotNetCoreCLI@2
+          displayName: Test
+          inputs:
+            command: test
+            projects: '**/*[Tt]ests/*.csproj'
+            arguments: '--configuration Release --collect "Code coverage"'
+        - task: PowerShell@2
+          displayName: Cobertura
+          inputs:
+            targetType: 'inline'
+            workingDirectory: '$(Agent.TempDirectory)'
+            script: |
+              $ver = (Get-ChildItem $env:USERPROFILE\.nuget\packages\Microsoft.CodeCoverage | Select-Object -Property Name | Sort-Object -Descending | Select-Object -First 1).Name
+              $netstd = (Get-ChildItem $env:USERPROFILE\.nuget\packages\Microsoft.CodeCoverage\$ver\build\ | Select-Object -Property Name | Sort-Object -Descending | Select-Object -First 1).Name
+              Get-ChildItem -Recurse -Filter "*.coverage" | % {
+                $outfile = "$([System.IO.Path]::GetFileNameWithoutExtension($_.FullName)).coveragexml"
+                $output = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($_.FullName), $outfile)
+                "Analyse '$($_.FullName)' with output '$output'..."
+                . $env:USERPROFILE\.nuget\packages\microsoft.codecoverage\$ver\build\$netstd\CodeCoverage\CodeCoverage.exe analyze /output:$output $_.FullName
+              }
+        - task: SonarQubeAnalyze@4
+          displayName: "Ejecutando análisis de código"
+        - task: SonarQubePublish@4
+          displayName: "Publicando resultados de Quality Gate"
+          condition: succeededOrFailed()
+          inputs:
+            pollingTimeoutSec: "300"
+- stage: Build
+  displayName: 'Build'
+  dependsOn: Analisis
+  jobs:
+    - job:  'BuildImage'
+      pool: DockerAgents
+      steps:
+        - task: Docker@2
+          displayName: Docker Build
+          inputs:
+            buildContext: .
+            command: build
+            Dockerfile: ProductosBFF/Dockerfile
+            repository: $(IMAGE_NAME)
+            tags: |
+              $(Build.SourceVersion)
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(System.DefaultWorkingDirectory)/kubernetes-deploy.tokenized.yaml'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'

@@ -1,0 +1,4064 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProductosBFF</name>
+    </assembly>
+    <members>
+        <member name="T:ProductosBFF.Class.SerializaJson">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Class.SerializaJson.CreateHttpContent(System.Object)">
+            <summary>
+            Método privados para envio de datos
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Class.SerializaJson.SerializeJsonIntoStream(System.Object,System.IO.Stream)">
+            <summary>
+            Método privado para serialización de datos
+            </summary>
+            <param name="value"></param>
+            <param name="stream"></param>
+        </member>
+        <member name="T:ProductosBFF.Controllers.ProductsController">
+            <summary>
+            Controlador
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.#ctor(ProductosBFF.Interfaces.IProductoService,Microsoft.Extensions.Logging.ILogger{ProductosBFF.Controllers.ProductsController})">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.GetProducts(System.Int64)">
+            <summary>
+            Obtiene los productos de un usuario según su RUT
+            </summary>
+            <param name="rut">RUT identificador</param>
+            <returns>
+            Una instancia de <see cref="T:ProductosBFF.Models.Productos.ProductDto"/>
+            </returns>
+            <response code="200">Se encontraron los productos</response>
+            <response code="401">Usuario no autenticado</response>
+            <response code="403">Recurso prohibido para el usuario autenticado</response>
+            <response code="404">No se encontraron los productos</response>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.GetProductosLeyCorta(System.Decimal)">
+            <summary>
+            Obtiene los productos de ley corta
+            </summary>
+            <param name="rut">RUT identificador</param>
+            <returns>
+            Una instancia de <see cref="T:ProductosBFF.Models.Productos.ProductDto"/>
+            </returns>
+            <response code="200">Se encontraron los productos</response>
+            <response code="401">Usuario no autenticado</response>
+            <response code="403">Recurso prohibido para el usuario autenticado</response>
+            <response code="404">No se encontraron los productos</response>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.DownloadDocumentBC(System.String)">
+            <summary> Descarga BC </summary>
+            <param name="CodeBC"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.GetCausalesDespidos">
+             <summary>
+             Endpoint que trae las causales despidos
+             </summary>
+             <returns></returns>
+            
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.GetMotivosCancelacion">
+            <summary>
+            Trae Motivos Cancelacion
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.EnviarDatosCesantia(ProductosBFF.Domain.Parameters.BodySolicitudActivacion)">
+            <summary>
+            
+            </summary>
+            <param name="solicitud"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.Get(System.Int32)">
+            <summary>
+            Obtiene la continuidad del producto
+            </summary>
+            <param name="rut">RUT identificador</param>
+            <response code="200">Se encontraron los productos</response>
+            <response code="401">Usuario no autenticado</response>
+            <response code="403">Recurso prohibido para el usuario autenticado</response>
+            <response code="404">No se encontraron los productos</response>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.RegistraSolicitudContinuidadCesantia(ProductosBFF.Domain.Parameters.BodySolicitudActivacion)">
+            <summary>
+            Registra una nueva solicitud de continuidad de BC de cesantía
+            </summary>
+            <param name="solicitud"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.PostEnvioCorreo(ProductosBFF.Domain.Parameters.EnvioCorreo)">
+            <summary>
+            Obtiene el estado del usuario si es multicotizante
+            </summary>
+            <param name="envioCorreo"></param>
+            <returns></returns>
+            <response code="200">Se enviaron los correos</response>
+            <response code="401">Usuario no autenticado</response>
+            <response code="403">Recurso prohibido para el usuario autenticado</response>
+            <response code="404">No se encontraron los productos</response>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.PostGenerarFun4(ProductosBFF.Models.BCCesantia.DtoFun4)">
+            <summary>
+            Genera el documento fun4
+            </summary>
+            <param name="datosFun4"></param>
+            <returns></returns>
+            <response code="200">Se enviaron los correos</response>
+            <response code="401">Usuario no autenticado</response>
+            <response code="403">Recurso prohibido para el usuario autenticado</response>
+            <response code="404">No se logro generar el fun4 </response>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.ProcesoSolicitud(System.Int32)">
+            <summary>
+             
+            </summary>
+            <param name="idSiniestro"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.DetalleSolicitudVC(System.Int32)">
+            <summary>
+            Metodo que trae el historial de solicitudes del afiliado
+            </summary>
+            <param name="idSiniestro"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.DetalleSolicitudCesantia(System.Int32)">
+            <summary>
+            Metodo que trae el historial de solicitudes del afiliado
+            </summary>
+            <param name="idSiniestro"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.HistorialSolicitudes(System.Int32)">
+            <summary>
+            Metodo que trae el historial de solicitudes del afiliado
+            </summary>
+            <param name="folio"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.ConsultaTipoAccidente">
+            Consulta tipo accidente
+            <returns>
+            Una colección de <see cref="T:ProductosBFF.Models.Accidentes.TipoAccidenteDto"/>
+            </returns>
+            <response code="200">Se consultó tipo accidente</response>
+            <response code="401">Usuario no autenticado</response>
+            <response code="403">Recurso prohibido para el usuario autenticado</response>
+            <response code="404">No se consultó ningún tipo de accidente</response>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.ConsultaCausaAccidente(System.Decimal)">
+            Consulta causa accidente
+            <param name="tipoAccidente"></param>
+            <returns>
+            Una colección de <see cref="T:ProductosBFF.Models.Accidentes.CausalAccidenteDto"/>
+            </returns>
+            <response code="200">Se consultó causa accidente</response>
+            <response code="401">Usuario no autenticado</response>
+            <response code="403">Recurso prohibido para el usuario autenticado</response>
+            <response code="404">No se consultó ninguna causa de accidente</response>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.DocumentosAccidente(ProductosBFF.Domain.Parameters.BodyDocumentosAccidente)">
+            Consulta documentos accidente
+            <param name="documentosAccidente"></param>
+            <returns>
+            Una colección de <see cref="T:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto"/>
+            </returns>
+            <response code="200">Se consultó documentos accidente</response>
+            <response code="401">Usuario no autenticado</response>
+            <response code="403">Recurso prohibido para el usuario autenticado</response>
+            <response code="404">No se consultó ninguna causa de accidente</response>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.IngresarArchivoAccidente(ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente)">
+            Ingresar archivo accidente
+            <param name="ingresarArchivoAccidente"></param>
+            <returns>
+            Una colección de <see cref="T:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto"/>
+            </returns>
+            <response code="200">Se consultó documentos accidente</response>
+            <response code="401">Usuario no autenticado</response>
+            <response code="403">Recurso prohibido para el usuario autenticado</response>
+            <response code="404">No se consultó ninguna causa de accidente</response>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.IngresarAccidente(ProductosBFF.Domain.Parameters.BodyIngresarAccidente)">
+            Ingresar accidente
+            <param name="ingresarAccidente"></param>
+            <returns>
+            Una colección de <see cref="T:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto"/>
+            </returns>
+            <response code="200">Se consultó documentos accidente</response>
+            <response code="401">Usuario no autenticado</response>
+            <response code="403">Recurso prohibido para el usuario autenticado</response>
+            <response code="404">No se consultó ninguna causa de accidente</response>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.CargaArchivosShira(ProductosBFF.Domain.Parameters.BodyCargarArchivoShira)">
+            Ingresar accidente
+            <param name="cargarArchivoShira"></param>
+            <returns>
+            Una colección de <see cref="T:ProductosBFF.Models.Accidentes.CargarArchivoShiraDto"/>
+            </returns>
+            <response code="200">Se consultó documentos accidente</response>
+            <response code="401">Usuario no autenticado</response>
+            <response code="403">Recurso prohibido para el usuario autenticado</response>
+            <response code="404">No se consultó ninguna causa de accidente</response>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.CargaArchivosContent(ProductosBFF.Domain.Parameters.BodyCargarArchivoContent)">
+            Ingresar accidente
+            <param name="cargarArchivoContent"></param>
+            <returns>
+            Una colección de <see cref="T:ProductosBFF.Models.Accidentes.CargarArchivoShiraDto"/>
+            </returns>
+            <response code="200">Se consultó documentos accidente</response>
+            <response code="401">Usuario no autenticado</response>
+            <response code="403">Recurso prohibido para el usuario autenticado</response>
+            <response code="404">No se consultó ninguna causa de accidente</response>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.ObtenerDiagnosticoVc(ProductosBFF.Domain.Parameters.BodyObtenerDiagnostico)">
+            <summary>
+            
+            </summary>
+            <param name="obtenerDiagnostico"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Controllers.ProductsController.CancelaBcCostoCero(ProductosBFF.Domain.Parameters.BodyCancelarBcParam)">
+            <summary>
+            Endpoint para cancelar Bc Costo Cero
+            </summary>
+            <param name="bodyCancelarBcParam"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ProductosBFF.Domain.Accidentes.CargarArchivoShira">
+            <summary>
+            CargarArchivoShira
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.CargarArchivoShira.ResultadoCargaShira">
+            <summary>
+            Resultado carga a Shira
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.CargarArchivoShira.EstadoCarga">
+            <summary>
+            EstadoCarga
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Accidentes.CausalAccidente">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.CausalAccidente.ID">
+            <summary>
+            Id Tipo Accidente
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.CausalAccidente.DESCRIPCION">
+            <summary>
+            Descripcion de la causa del accidente
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Accidentes.DocumentosAccidente">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.DocumentosAccidente.ID">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.DocumentosAccidente.NOMBRE">
+            <summary>
+            NOMBRE
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.DocumentosAccidente.GLOSA">
+            <summary>
+            GLOSA
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.DocumentosAccidente.OBLIGATORIO">
+            <summary>
+            OBLIGATORIO
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.DocumentosAccidente.CHECKBOX">
+            <summary>
+            CHECKBOX
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.DocumentosAccidente.NAME">
+            <summary>
+            NAME 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.DocumentosAccidente.TITULO_MODAL">
+            <summary>
+            TITULO_MODAL
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.DocumentosAccidente.SUBTITULO_MODAL">
+            <summary>
+            UBTITULO_MODAL
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.DocumentosAccidente.LISTA">
+            <summary>
+            LISTA
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.DocumentosAccidente.IMAGEN">
+            <summary>
+            IMAGEN 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.DocumentosAccidente.FORMULARIO">
+            <summary>
+            FORMULARIO
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.DocumentosAccidente.TextoAlertaModal">
+            <summary>
+            TEXTO ALERTA MODAL
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Accidentes.IngresarAccidente">
+            <summary>
+            class
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.IngresarAccidente.pon_error">
+            <summary>
+            Pon error
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.IngresarAccidente.pon_id_siniestro_vc">
+            <summary>
+            Id siniestro vc
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Accidentes.IngresarArchivoAccidente">
+            <summary>
+            class
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.IngresarArchivoAccidente.pon_error">
+            <summary>
+            Pon error
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Accidentes.TipoAccidente">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.TipoAccidente.ID">
+            <summary>
+            Id Tipo Accidente
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Accidentes.TipoAccidente.DESCRIPCION">
+            <summary>
+            Descripcion del tipp de accidente
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Authorization.UserAuthorization">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Authorization.UserAuthorization.TOKEN">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Authorization.UserAuthorization.RUT">
+            <summary>
+            Rut
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Causales.BodyCausales">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Causales.BodyCausales.codigoTrabajador">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Causales.Causales">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Causales.Causales.ID_CAUSALES_DESPIDO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Causales.Causales.CAUSALES_DESPIDO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Causales.Causales.ID_TIPO_TRABAJADOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Causales.MotivosCancelacion">
+            <summary>
+            Motivos de Cancelacion
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Causales.MotivosCancelacion.Codigo">
+            <summary>
+            Codigo Motivo
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Causales.MotivosCancelacion.Descripcion">
+            <summary>
+            Descripcion Motivo
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Commons.InputKey">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Commons.InputKey.Key">
+            <summary>
+            Key para encriptar
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.BodyBcArchivo">
+            <summary>
+            Body Archivo
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyBcArchivo.PinIdSiniestro">
+            <summary>
+            Id Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyBcArchivo.PinIdParametro">
+            <summary>
+            ID parametro documento
+            </summary>
+            Quitar
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyBcArchivo.PivTipoDoc">
+            <summary>
+            Tipo Documento
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyBcArchivo.PivDetalleContent">
+            <summary>
+            Detalle Contenido
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyBcArchivo.PinIdContent">
+            <summary>
+            Id Contenido
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.BodyCancelarBcParam">
+            <summary>
+            Clase para cancelar Bc Costo Cero
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCancelarBcParam.pin_folio">
+            <summary>
+            Pin Folio AFiliada
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCancelarBcParam.pin_codigo_bc">
+            <summary>
+             Codigo Bc 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCancelarBcParam.pin_codigo_motivo">
+            <summary>
+            Codigo Motivo de cancelar
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCancelarBcParam.pin_firma">
+            <summary>
+            id_persona como Firma
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.IdSistema">
+            <summary>
+            ID Sistema
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.IdTipoDocto_CM">
+            <summary>
+             Id Tipo Documento
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.IdFolio">
+            <summary>
+            Folio
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.CodContent">
+            <summary>
+            Codigo contenido
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.Imagen">
+            <summary>
+            imagen
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.Depto">
+            <summary>
+            Departamento
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.ApPat">
+            <summary>
+            Apellido paterno
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.ApMat">
+            <summary>
+            Apellido materno
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.Nombres">
+            <summary>
+            Nombres
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.Rut">
+            <summary>
+            Rut
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.Dig">
+            <summary>
+            Digito Verificador
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.FecVisa">
+            <summary>
+            Fecha Visa
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.CodUsuario">
+            <summary>
+            Codigo Ususario
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.CodArea">
+            <summary>
+            Cod Area
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.CodSistMat">
+            <summary>
+            Codigo Sistema
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.CodTipo">
+            <summary>
+            Codigo Tipo
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.Etapa">
+            <summary>
+            Etapa
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.StrCodAccion">
+            <summary>
+            Codigo Accion
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoContent.FileBase64">
+            <summary>
+            Archivo
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.BodyCargarArchivoShira">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoShira.PIV_Archivo">
+            <summary>
+            PIV_ARCHIVO
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoShira.PIV_NombreArchivo">
+            <summary>
+            PIV_NOMBRE_ARCHIVO
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoShira.PIN_Rut">
+            <summary>
+            Rut
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyCargarArchivoShira.PIV_RutaArchivo">
+            <summary>
+            Ruta de carga Shira
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.BodyDocumentosAccidente">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyDocumentosAccidente.IdBc">
+            <summary>
+            IdBc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyDocumentosAccidente.TipoAccidente">
+            <summary>
+            TipoAccidente
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyDocumentosAccidente.TipoAtencion">
+            <summary>
+            TipoAtencion
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyDocumentosAccidente.MarcaUrgencia">
+            <summary>
+            MarcaUrgencia
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyDocumentosAccidente.MarcaIntervencion">
+            <summary>
+            MarcaIntervencion
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyDocumentosAccidente.RcaSeguro">
+            <summary>
+            MarcaSeguro
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyDocumentosAccidente.Continuidad">
+            <summary>
+            Continuidad
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.BodyHistorialCabecera">
+            <summary>
+            Vlase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyHistorialCabecera.pin_id_siniestro">
+            <summary>
+            Id Siniestro
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.BodyHistorialSolicitudes">
+            <summary>
+            Clase parametro para historial solicitudes
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyHistorialSolicitudes.pin_folio">
+            <summary>
+            Pin Folio
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.BodyIngresarAccidente">
+            <summary>
+            class
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.RutAfil">
+            <summary>
+            RutAfil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.FolioAfil">
+            <summary>
+            FolioAfil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.DvAfil">
+            <summary>
+            DvAfil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.Nombres">
+            <summary>
+            Nombres
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.Apellidos">
+            <summary>
+            Apellidos
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.MailAfil">
+            <summary>
+            MailAfil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.FonoAfil">
+            <summary>
+            FonoAfil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.NombreBenef">
+            <summary>
+            NombreBenef
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.NumeroBcAfil">
+            <summary>
+            NumeroBcAfil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.DescripcionBc">
+            <summary>
+            DescripcionBc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.TipoAccidente">
+            <summary>
+            TipoAccidente
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.FechaAccidente">
+            <summary>
+            FechaAccidente
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.HoraAccidente">
+            <summary>
+            HoraAccidente
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.LugarAccidente">
+            <summary>
+            LugarAccidente
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.CausaAccidente">
+            <summary>
+            CausaAccidente
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.DescripcionAccidente">
+            <summary>
+            DescripcionAccidente
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.TipoAtencion">
+            <summary>
+            TipoAtencion
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.FueUrgencia">
+            <summary>
+            FueUrgencia
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.HuboInterv">
+            <summary>
+            HuboInterv
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.OtroSeguro">
+            <summary>
+            OtroSeguro
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.MontoTotal">
+            <summary>
+            MontoTotal
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.Banco">
+            <summary>
+            Banco
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.TipoCuenta">
+            <summary>
+            TipoCuenta
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.NumeroCuenta">
+            <summary>
+            NumeroCuenta
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.EsValeVista">
+            <summary>
+            EsValeVista
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.RutBeneficiario">
+            <summary>
+            RutBeneficiario
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarAccidente.DvBeneficiario">
+            <summary>
+            DvBeneficiario
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente">
+            <summary>
+            class
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente.IdSiniestro">
+            <summary>
+            IdSiniestro
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente.IdContent">
+            <summary>
+            IdContent
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente.DetalleContent">
+            <summary>
+            DetalleContent
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente.IdArchReq">
+            <summary>
+            IdArchReq
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente.TipoDoc">
+            <summary>
+            TipoDoc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente.RutaArchivo">
+            <summary>
+            RutaArchivo
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente.Declaracion">
+            <summary>
+            Declaracion
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.BodyObtenerDiagnostico">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyObtenerDiagnostico.rutAfil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyObtenerDiagnostico.bc">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.BodyProducto">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodyProducto.PIN_RUT">
+            <summary>
+            Parametro rut
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.BodySolicitudActivacion">
+            <summary>
+            Clase que toma los parametros 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.RutAfil">
+            <summary>
+            Rut Afiliado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.FolioAfil">
+            <summary>
+            Folio Suscripcion Afil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.DvAfil">
+            <summary>
+            Digito verificador Afil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.Nombres">
+            <summary>
+            Nombres
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.Apellidos">
+            <summary>
+            Apellidos
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.MailAfil">
+            <summary>
+            Email Afiliado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.FonoAfil">
+            <summary>
+            Fono Afiliado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.NumBcAfil">
+            <summary>
+            Numero BC
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.DescripcionBc">
+            <summary>
+            Descripcion BC
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.FechaInicioVigencia">
+            <summary>
+            Fecha Vigencia Bc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.FechaDespido">
+            <summary>
+            Fecha Despido
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.FechaFiniquito">
+            <summary>
+            Fecha Finiquito
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.CausalDespido">
+            <summary>
+            Causal Despido
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.TipoTrabajador">
+            <summary>
+            Tipo Trabajador
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.TipoFamilia">
+            <summary>
+            Tipo Familia
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.Imagen">
+            <summary>
+            Imagen
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.FileBase64">
+            <summary>
+            Archivo Base 64 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.Token">
+            <summary>
+            Token de sesion del usuario
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.BodySolicitudActivacion.Id">
+            <summary>
+            ID Usuario
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.ContinuidadProducto">
+            <summary>
+            Representa rut para consultar su continuidad del producto
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.ContinuidadProducto.rut">
+            <summary>
+            correlativo unico del producto del pack
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.EnvioCorreo">
+            <summary>
+            Clase que representa los datos necesarios para el envío de correo.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.EnvioCorreo.PinTipoRechazo">
+            <summary>
+            Obtiene o establece el tipo de rechazo de la solicitud desde la NSD.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.EnvioCorreo.PinRutAfil">
+            <summary>
+            Obtiene o establece el Rut del Afiliado.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.EnvioCorreo.PivDvAfil">
+            <summary>
+            Obtiene o establece el dígito verificador del Afiliado.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.EnvioCorreo.PivMailAfil">
+            <summary>
+            Obtiene o establece el correo electrónico del Afiliado.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.EnvioCorreo.PivNombres">
+            <summary>
+            Obtiene o establece los nombres del Afiliado.
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.ObtenerComprobanteParam">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.ObtenerComprobanteParam.Folio">
+            <summary>
+            Folio del afiliado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.ObtenerComprobanteParam.Codigo">
+            <summary>
+            Codigo Bc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.ObtenerComprobanteParam.LogTermino">
+            <summary>
+            Registro de log de termino
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.ObtenerComprobanteParam.Canal">
+            <summary>
+            Sistema
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.ObtieneFun4">
+            <summary>
+            Clase que representa los datos de entrada para la validación de la función 4.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.ObtieneFun4.Folio">
+            <summary>
+            Obtiene o establece el folio para la validación de la función 4.
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.ParamIdBc">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.ParamIdBc.IdBc">
+            <summary>
+            Id Bc
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.ParamTipoAccidente">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.ParamTipoAccidente.IdTipoAccidente">
+            <summary>
+            Id Tipo Accidente
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.ProductoBC">
+            <summary> Producto BC </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.ProductoBC.BCCode">
+            <summary> Documento </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Parameters.TrazaPadreParam">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Parameters.TrazaPadreParam.pin_id_siniestro">
+            <summary>
+            ID Solicitud
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Productos.DocCesantia">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.DocCesantia.Result">
+            <summary>
+            Objeto resultado content manager
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.DocCesantia.SuccessfulOperation">
+            <summary>
+            Mensage de estado de la operacion
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Productos.Result">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Result.Idcontent">
+            <summary>
+            Id Content recibido de Content Manager
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Result.EstadoCarga">
+            <summary>
+            Estado de carga
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Result.MensajeError">
+            <summary>
+            Mensaje de error en caso de fallar
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Productos.DocumentoBC">
+            <summary> Producto BC </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.DocumentoBC.DOCUMENTO">
+            <summary> Documento </summary>
+        </member>
+        <member name="T:ProductosBFF.Domain.Productos.Producto">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.CODIGO">
+            <summary>
+            Codigo
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.NOMBRE">
+            <summary>
+            Nombre
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.FECHA_INICIO">
+            <summary>
+            Fecha Inicio
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.COBERTURA">
+            <summary>
+            Cobertura
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.MONTO_UF">
+            <summary>
+            Monto UF
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.MONTO_PESOS">
+            <summary>
+            Monto pesos
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.TOPE">
+            <summary>
+            Tope
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.MODALIDAD_COTIZACION">
+            <summary>
+            Modalidad de cotizacion
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.INCLUIDO_PLAN">
+            <summary>
+            Incluido plan
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.DISPONIBLE">
+            <summary>
+            Disponible
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.CONTRATO">
+            <summary>
+            Contrato
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.USAR_DESDE">
+            <summary>
+            Usar desde
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.CODIGO_PLAN">
+            <summary>
+            Codigo plan
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.URL_CONTRATO">
+            <summary>
+            URL del contrato
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.PLAZO_USO">
+            <summary>
+            Tope
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.TEXTO_ETIQUETA">
+            <summary>
+            TEXTO_ETIQUETA
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.COLOR_ETIQUETA">
+            <summary>
+            COLOR_ETIQUETA
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.ICONO">
+            <summary>
+            ICONO
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.MULTICOTIZANTE">
+            <summary>
+            MULTICOTIZANTE
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.PLAZO_VALIDO">
+            <summary>
+            PLAZO_VALIDO
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.TEXTO_SOLICITUD">
+            <summary>
+            TEXTO_SOLICITUD
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.FAMILIA">
+            <summary>
+            FAMILIA
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.ES_MULTICOTIZANTE">
+            <summary>
+            ES_MULTICOTIZANTE
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Domain.Productos.Producto.ES_COLECTIVO">
+            <summary>
+            ES_COLECTIVO 
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Exceptions.ContentManagerException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Exceptions.ContentManagerException.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Exceptions.ContentManagerException.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ProductosBFF.Exceptions.ContentManagerException.#ctor(System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:ProductosBFF.Exceptions.ContentManagerException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="M:ProductosBFF.Exceptions.ContentManagerException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:ProductosBFF.Filters.UserAuthorizationFilter">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Filters.UserAuthorizationFilter.OnAuthorization(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
+            <summary>
+            Autorizacion
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:ProductosBFF.Filters.ValidateModelStateAttribute">
+            <summary>
+            ValidateModelStateAttribute Class
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Filters.ValidateModelStateAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            ValidateModelStateAttribute => OnActionExecuting method
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:ProductosBFF.Infrastructure.ProductoInfrastructure">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.#ctor(ProductosBFF.Interfaces.IHttpClientService,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.GetProductsAsync(ProductosBFF.Domain.Parameters.BodyProducto)">
+            <summary>
+            GetProductsAsync
+            </summary>
+            <param name="rut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.GetProductosLeyCorta(System.Decimal)">
+            <summary>
+            GetProductosLeyCorta
+            </summary>
+            <param name="rut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.GetProductosCostoCero(System.Decimal)">
+            <summary>
+            GetProductosLeyCorta
+            </summary>
+            <param name="rut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.CancelarBcCostoCero(ProductosBFF.Domain.Parameters.BodyCancelarBcParam)">
+            <summary>
+            
+            </summary>
+            <param name="bbodyCancelarParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.ObtenerComprobante(ProductosBFF.Domain.Parameters.ObtenerComprobanteParam)">
+            <summary>
+            Metoodo que trae el comprobante
+            </summary>
+            <param name="obtenerComprobanteParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.GetDocumentsBCBase64(ProductosBFF.Domain.Parameters.ProductoBC)">
+            <summary> Descarga BC </summary>
+            <param name="CodeBC"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.EnviarDatosAfilBCCesantia(ProductosBFF.Models.BCCesantia.DtoAfil)">
+            <summary>
+            envia datos del afiliado a guardar a la bd
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.EnviarArchivosSini(ProductosBFF.Domain.Parameters.BodyBcArchivo)">
+            <summary>
+            Envia Datos de archivo a la bd
+            </summary>
+            <param name="bodyBcArchivo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.EnviarDatosDocBCCesantia(ProductosBFF.Models.BCCesantia.DtoDocCm)">
+            <summary>
+            Envia documento a guardar en content manager
+            </summary>
+            <param name="docCmCesantia"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.EnviarFun4(ProductosBFF.Models.BCCesantia.DtoFun4)">
+            <summary>
+            Envia Datos para api Afil para id content fun4
+            </summary>
+            <param name="bodyDatosFun4"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.GetCausalesAsync">
+            <summary>
+            Obtiene las Causales de despido
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.GetMotivosCancelacion">
+            <summary>
+            Servicio que trae Motivos Cancelacion
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.ContinuidadProducto(ProductosBFF.Domain.Parameters.ContinuidadProducto)">
+            <summary>
+            Obtiene la continuidad del Producto
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.RegistraContinuidadCesantia(System.Int32)">
+            <summary>
+            Registra la continuidad de un BC de cesantía
+            </summary>
+            <param name="rut"></param>
+            <returns>El Id del siniestro en caso de haber sido ejecutado correctamente</returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.EnviarCorreo(ProductosBFF.Models.BCCesantia.DtoEnvioCorreo)">
+            <summary>
+            envia los datos para el correo de rechazo
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.ValidaFun4(ProductosBFF.Domain.Parameters.ObtieneFun4)">
+            <summary>
+            Realiza la validación de la función 4 con los datos proporcionados.
+            </summary>
+            <param name="obtieneFun4">Datos de entrada para la validación de la función 4.</param>
+            <returns>Una tarea asincrónica que representa la operación, devolviendo la respuesta de validación de la función 4.</returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.ObtenerTipoAccidente">
+            <summary>
+            ObtenerTipoAccidente
+            </summary>        
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.ObtenerCausalAccidente(ProductosBFF.Domain.Parameters.ParamTipoAccidente)">
+            <summary>
+            ObtenerCausaAccidente
+            </summary>   
+             /// <param name="tipoAccidente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.ObtenerDocumentosAccidente(ProductosBFF.Domain.Parameters.BodyDocumentosAccidente)">
+            <summary>
+            ObtenerDocumentosAccidente
+            </summary>   
+             /// <param name="documentosAccidente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.IngresarArchivoAccidente(ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente)">
+            <summary>
+            IngresarArchivoAccidente
+            </summary>   
+             /// <param name="ingresarArchivoAccidente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.IngresarAccidente(ProductosBFF.Domain.Parameters.BodyIngresarAccidente)">
+            <summary>
+            IngresarAccidente
+            </summary>   
+             /// <param name="ingresarAccidente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.CargaArchivosShira(ProductosBFF.Domain.Parameters.BodyCargarArchivoShira)">
+            <summary>
+            cargarArchivoShira
+            </summary>   
+             /// <param name="cargarArchivoShira"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.CargaArchivosContent(ProductosBFF.Domain.Parameters.BodyCargarArchivoContent)">
+            <summary>
+            Envia documento a guardar en content manager
+            </summary>
+            <param name="cargarArchivoContent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.DetalleSolicitudVC(ProductosBFF.Domain.Parameters.BodyHistorialCabecera)">
+            <summary>
+            Historial Solicitudes Cabecera
+            </summary>
+            <param name="bodyHistorialCabecera"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.DetalleSolicitudCesantia(ProductosBFF.Domain.Parameters.BodyHistorialCabecera)">
+            <summary>
+            
+            </summary>
+            <param name="bodyHistorialCabecera"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.HistorialSolicitudes(ProductosBFF.Domain.Parameters.BodyHistorialSolicitudes)">
+            <summary>
+            Trae el historial de solicitudes del afiliado
+            </summary>
+            <param name="bodyHistorialSolicitudes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.SolicitudesTrazaPadre(ProductosBFF.Domain.Parameters.TrazaPadreParam)">
+            <summary>
+            
+            </summary>
+            <param name="bodyTrazaPadreParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Infrastructure.ProductoInfrastructure.ObtenerDiagnosticoVc(ProductosBFF.Domain.Parameters.BodyObtenerDiagnostico)">
+            <summary>
+            
+            </summary>
+            <param name="obtenerDiagnostico"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ProductosBFF.Interfaces.ICallApiClass">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.ICallApiClass.GetApi``1(System.String,System.String,System.Object)">
+            <summary>
+            Método que llama API via GET
+            </summary>
+            <typeparam name="T">Tipo que debe retornar</typeparam>
+            <param name="appName">Nombre de la aplicacion en el appsetting.JSON</param>
+            <param name="method">Método de la API</param>
+            <param name="varIn">Objeto que tiene las variables de entrada, puede ser null</param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.ICallApiClass.PostApi``1(System.String,System.String,System.Object)">
+            <summary>
+            Método que llama API via POST
+            </summary>
+            <typeparam name="T">Tipo que debe retornar</typeparam>
+            <param name="appName">Nombre de la aplicacion en el appsetting.JSON</param>
+            <param name="method">Método de la API</param>
+            <param name="varIn">Objeto que tiene las variables de entrada, puede ser null</param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.ICallApiClass.PutApi``1(System.String,System.String,System.Object)">
+            <summary>
+            Método que llama API via POST
+            </summary>
+            <typeparam name="T">Tipo que debe retornar</typeparam>
+            <param name="appName">Nombre de la aplicacion en el appsetting.JSON</param>
+            <param name="method">Método de la API</param>
+            <param name="varIn">Objeto que tiene las variables de entrada, puede ser null</param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.ICallApiClass.PatchApi``1(System.String,System.String,System.Object)">
+            <summary>
+            Método que llama API via PATCH
+            </summary>
+            <typeparam name="T">Tipo que debe retornar</typeparam>
+            <param name="appName">Nombre de la aplicacion en el appsetting.JSON</param>
+            <param name="method">Método de la API</param>
+            <param name="varIn">Objeto que tiene las variables de entrada, puede ser null</param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.ICallApiClass.DeleteApi``1(System.String,System.String,System.Object)">
+            <summary>
+            Método que llama API via DELETE
+            </summary>
+            <typeparam name="T">Tipo que debe retornar</typeparam>
+            <param name="appName">Nombre de la aplicacion en el appsetting.JSON</param>
+            <param name="method">Método de la API</param>
+            <param name="varIn">Objeto que tiene las variables de entrada, puede ser null</param>
+            <returns></returns>
+        </member>
+        <member name="T:ProductosBFF.Interfaces.IHttpClientService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IHttpClientService.GetAsync``1(System.String,System.Object,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="queryParams"></param>
+            <param name="headers"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IHttpClientService.PostAsync``1(System.String,System.Object,System.Object,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="body"></param>
+            <param name="queryParams"></param>
+            <param name="headers"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IHttpClientService.PutAsync``1(System.String,System.Object,System.Object,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="body"></param>
+            <param name="queryParams"></param>
+            <param name="headers"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:ProductosBFF.Interfaces.IProductoInfrastructure">
+            <summary>
+            Interfaz
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.GetProductsAsync(ProductosBFF.Domain.Parameters.BodyProducto)">
+            <summary>
+            GetProducts
+            </summary>
+            <param name="rut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.GetProductosLeyCorta(System.Decimal)">
+            <summary>
+            GetProducts
+            </summary>
+            <param name="rut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.GetProductosCostoCero(System.Decimal)">
+            <summary>
+            
+            </summary>
+            <param name="rut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.CancelarBcCostoCero(ProductosBFF.Domain.Parameters.BodyCancelarBcParam)">
+            <summary>
+            Servicio que cancela bc costo cero
+            </summary>
+            <param name="bbodyCancelarParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.ObtenerComprobante(ProductosBFF.Domain.Parameters.ObtenerComprobanteParam)">
+            <summary>
+            Obtener Comprobante
+            </summary>
+            <param name="obtenerComprobanteParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.GetDocumentsBCBase64(ProductosBFF.Domain.Parameters.ProductoBC)">
+            <summary>
+            GetProducts
+            </summary>
+            <param name="CodeBC"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.GetCausalesAsync">
+            <summary>
+            GetCausalesAsync
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.GetMotivosCancelacion">
+            <summary>
+            Get Motivos Cancelacion
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.EnviarDatosAfilBCCesantia(ProductosBFF.Models.BCCesantia.DtoAfil)">
+            <summary>
+            EnviarDatosAfilBCCesantia
+            </summary>
+            <param name="bodyBcCesantiaAfil"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.EnviarDatosDocBCCesantia(ProductosBFF.Models.BCCesantia.DtoDocCm)">
+            <summary>
+            
+            </summary>
+            <param name="docCmCesantia"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.EnviarFun4(ProductosBFF.Models.BCCesantia.DtoFun4)">
+            <summary>
+            Envia parametros para traer fun4
+            </summary>
+            <param name="bodyDatosFun4"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.EnviarArchivosSini(ProductosBFF.Domain.Parameters.BodyBcArchivo)">
+            <summary>
+            Envia datos Bc Archivo
+            </summary>
+            <param name="bodyBcArchivo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.ContinuidadProducto(ProductosBFF.Domain.Parameters.ContinuidadProducto)">
+            <summary>
+            Servicio que consulta la continuidad del producto
+            </summary>
+            <param name="rut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.RegistraContinuidadCesantia(System.Int32)">
+            <summary>
+            Registra la continuidad de un BC de cesantía
+            </summary>
+            <param name="rut"></param>
+            <returns>El Id del siniestro en caso de haber sido ejecutado correctamente</returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.EnviarCorreo(ProductosBFF.Models.BCCesantia.DtoEnvioCorreo)">
+            <summary>
+            Envia datos para correo de rechazo
+            </summary>
+            <param name="envioCorreo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.ValidaFun4(ProductosBFF.Domain.Parameters.ObtieneFun4)">
+            <summary>
+            Realiza la validación de la función 4 con los datos proporcionados.
+            </summary>
+            <param name="obtieneFun4">Datos de entrada para la validación de la función 4.</param>
+            <returns>Una tarea asincrónica que representa la operación, devolviendo la respuesta de validación de la función 4.</returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.ObtenerTipoAccidente">
+            <summary>
+            Obtiene tipos de aacidente
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.ObtenerCausalAccidente(ProductosBFF.Domain.Parameters.ParamTipoAccidente)">
+            <summary>
+            ObtenerCausaAccidente
+            </summary>   
+             /// <param name="tipoAccidente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.ObtenerDocumentosAccidente(ProductosBFF.Domain.Parameters.BodyDocumentosAccidente)">
+            <summary>
+            ObtenerDocumentosAccidente
+            </summary>   
+             /// <param name="documentosAccidente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.IngresarArchivoAccidente(ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente)">
+            <summary>
+            IngresarArchivoAccidente
+            </summary>   
+             /// <param name="ingresarArchivoAccidente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.IngresarAccidente(ProductosBFF.Domain.Parameters.BodyIngresarAccidente)">
+            <summary>
+            IngresarAccidente
+            </summary>   
+             /// <param name="ingresarAccidente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.CargaArchivosShira(ProductosBFF.Domain.Parameters.BodyCargarArchivoShira)">
+            <summary>
+            cargarArchivoShira
+            </summary>   
+             /// <param name="cargarArchivoShira"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.CargaArchivosContent(ProductosBFF.Domain.Parameters.BodyCargarArchivoContent)">
+            <summary>
+            Carga documento content
+            </summary>
+            <param name="cargarArchivoContent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.DetalleSolicitudVC(ProductosBFF.Domain.Parameters.BodyHistorialCabecera)">
+            <summary>
+            Historial solicitudes cabecera
+            </summary>
+            <param name="bodyHistorialCabecera"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.DetalleSolicitudCesantia(ProductosBFF.Domain.Parameters.BodyHistorialCabecera)">
+            <summary>
+            DetalleSolicitudCesantia
+            </summary>
+            <param name="bodyHistorialCabecera"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.HistorialSolicitudes(ProductosBFF.Domain.Parameters.BodyHistorialSolicitudes)">
+            <summary>
+            Trae el historial de solicitudes del afiliado
+            </summary>
+            <param name="bodyHistorialSolicitudes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.SolicitudesTrazaPadre(ProductosBFF.Domain.Parameters.TrazaPadreParam)">
+            <summary>
+            
+            </summary>
+            <param name="bodyTrazaPadreParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoInfrastructure.ObtenerDiagnosticoVc(ProductosBFF.Domain.Parameters.BodyObtenerDiagnostico)">
+            <summary>
+            
+            </summary>
+            <param name="obtenerDiagnostico"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ProductosBFF.Interfaces.IProductoService">
+            <summary>
+            Interface
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.GetProductos(ProductosBFF.Domain.Parameters.BodyProducto)">
+            <summary>
+            GetProductos
+            </summary>
+            <param name="rut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.GetProductosLeyCorta(System.Decimal)">
+            <summary>
+            GetProductosLeyCorta
+            </summary>
+            <param name="rut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.CancelaBcCostoCero(ProductosBFF.Domain.Parameters.BodyCancelarBcParam)">
+            <summary>
+            Servicio que cancela bc costo cero
+            </summary>
+            <param name="bodyCancelarBcParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.GetDocumentsBase64(ProductosBFF.Domain.Parameters.ProductoBC)">
+            <summary> Get Base 64 BC </summary>
+            <param name="codeBc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.GetCausales">
+            <summary>
+            Obtiene las Causales de despido
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.GetMotivos">
+            <summary>
+            Trae Motivos Cancelacion
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.EnviarDatosCesantia(ProductosBFF.Domain.Parameters.BodySolicitudActivacion)">
+            <summary>
+            Servicio que envia datos del afiliado y doc content manager
+            </summary>
+            <param name="solicitud"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.GetContinuidadProductoService(ProductosBFF.Domain.Parameters.ContinuidadProducto)">
+            <summary>
+            Servicio que consulta la continuidad del producto
+            </summary>
+            <param name="rut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.RegistraSolicitudContinuidadCesantia(ProductosBFF.Domain.Parameters.BodySolicitudActivacion)">
+            <summary>
+            Registra una nueva solicitud de continuidad de BC de cesantía
+            </summary>
+            <param name="solicitud"></param>
+            <returns>El Id del siniestro en caso de haber sido ejecutado correctamente</returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.EnviarCorreo(ProductosBFF.Domain.Parameters.EnvioCorreo)">
+            <summary>
+            Servicio que envia los datos para crear el correo de rechazo de la solicitud.
+            </summary>
+            <param name="envioCorreo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.EnviarFun4(ProductosBFF.Models.BCCesantia.DtoFun4)">
+            <summary>
+            Servicio que genera el documento fun 4
+            </summary>
+            <param name="datosFun4"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.ObtenerTipoAccidente">
+            <summary>
+            Obtiene tipos de aacidente
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.ObtenerCausalAccidente(ProductosBFF.Domain.Parameters.ParamTipoAccidente)">
+            <summary>
+            ObtenerCausaAccidente
+            </summary>   
+             /// <param name="tipoAccidente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.ObtenerDocumentosAccidente(ProductosBFF.Domain.Parameters.BodyDocumentosAccidente)">
+            <summary>
+            ObtenerDocumentosAccidente
+            </summary>   
+             /// <param name="documentosAccidente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.IngresarArchivoAccidente(ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente)">
+            <summary>
+            IngresarArchivoAccidente
+            </summary>   
+             /// <param name="ingresarArchivoAccidente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.IngresarAccidente(ProductosBFF.Domain.Parameters.BodyIngresarAccidente)">
+            <summary>
+            IngresarAccidente
+            </summary>   
+             /// <param name="ingresarAccidente"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.CargaArchivosShira(ProductosBFF.Domain.Parameters.BodyCargarArchivoShira)">
+            <summary>
+            cargarArchivoShira
+            </summary>   
+             /// <param name="cargarArchivoShira"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.CargaArchivosContent(ProductosBFF.Domain.Parameters.BodyCargarArchivoContent)">
+            <summary>
+            Carga documento content
+            </summary>
+            <param name="cargarArchivoContent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.DetalleSolicitudVC(ProductosBFF.Domain.Parameters.BodyHistorialCabecera)">
+            <summary>
+            
+            </summary>
+            <param name="bodyHistorialCabecera"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.DetalleSolicitudCesantia(ProductosBFF.Domain.Parameters.BodyHistorialCabecera)">
+            <summary>
+            DetalleSolicitudCesantia
+            </summary>
+            <param name="bodyHistorialCabecera"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.HistorialSolicitudes(ProductosBFF.Domain.Parameters.BodyHistorialSolicitudes)">
+            <summary>
+            Metodo que trae el historial de solicitudes del afiliado
+            </summary>
+            <param name="bodyHistorialSolicitudes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.SolicitudesTrazaPadre(ProductosBFF.Domain.Parameters.TrazaPadreParam)">
+            <summary>
+            
+            </summary>
+            <param name="bodyTrazaPadreParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Interfaces.IProductoService.ObtenerDiagnosticoVc(ProductosBFF.Domain.Parameters.BodyObtenerDiagnostico)">
+            <summary>
+            
+            </summary>
+            <param name="obtenerDiagnostico"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ProductosBFF.Mappings.IMapFrom`1">
+            <summary>
+            Interface generica la cual permite mapear un objeto
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Mappings.IMapFrom`1.Mapping(AutoMapper.Profile)">
+            <summary>
+            Método para mapear dos objetos
+            </summary>
+            <param name="profile">Perfil a mapear</param>
+        </member>
+        <member name="T:ProductosBFF.Mappings.MappingProfile">
+            <summary>
+            Clase para mapear perfiles
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Mappings.MappingProfile.#ctor">
+            <summary>
+            Constructor que llama a metodos para ejecutar el mapping
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Mappings.MappingProfile.ApplyCustomMappings">
+            <summary>
+            Aplicar mapeos customizables
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Mappings.MapsUtils">
+            <summary>
+            Mapeo customizado de clases a  campos piv y pin
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Mappings.MapsUtils.ApplyPinPivMappings``2(AutoMapper.IMappingExpression{``0,``1})">
+            <summary>
+            Mapeo de clases
+            </summary>
+            <param name="mapping"></param>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TDestination"></typeparam>
+        </member>
+        <member name="T:ProductosBFF.Models.Accidentes.CargarArchivoContentDto">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.CargarArchivoContentDto.Idcontent">
+            <summary>
+            Id Content recibido de Content Manager
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.CargarArchivoContentDto.MensajeError">
+            <summary>
+            Mensaje de error en caso de fallar
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.Accidentes.CargarArchivoContentDto.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapper
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="T:ProductosBFF.Models.Accidentes.CargarArchivoShiraDto">
+            <summary>
+            CargarArchivoShiraDto
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.CargarArchivoShiraDto.ResultadoCargaShira">
+            <summary>
+            Resultado carga a Shira
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.CargarArchivoShiraDto.EstadoCarga">
+            <summary>
+            EstadoCarga
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.Accidentes.CargarArchivoShiraDto.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapper
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="T:ProductosBFF.Models.Accidentes.CausalAccidenteDto">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.CausalAccidenteDto.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.CausalAccidenteDto.Descripcion">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.Accidentes.CausalAccidenteDto.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapper
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="T:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.Nombre">
+            <summary>
+            Nombre
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.Glosa">
+            <summary>
+            Glosa
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.Obligatorio">
+            <summary>
+            Obligatorio
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.CheckBox">
+            <summary>
+            CheckBox
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.Name">
+            <summary>
+            Name 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.TituloModal">
+            <summary>
+            TituloModal
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.SubtituloModal">
+            <summary>
+            SubtituloModal
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.Lista">
+            <summary>
+            Lista
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.Imagen">
+            <summary>
+            Imagen 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.Formulario">
+            <summary>
+            Formulario
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.TextoAlertaModal">
+            <summary>
+            Texto alerta modal
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.Accidentes.DocumentosAccidenteDto.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapper
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="T:ProductosBFF.Models.Accidentes.IngresarAccidenteDto">
+            <summary>
+            class
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.IngresarAccidenteDto.CodigoError">
+            <summary>
+            CodigoError
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.IngresarAccidenteDto.IdSiniestro">
+            <summary>
+            PonIdSiniestroVc
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.Accidentes.IngresarAccidenteDto.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapper
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="T:ProductosBFF.Models.Accidentes.IngresarArchivoAccidenteDto">
+            <summary>
+            class
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.IngresarArchivoAccidenteDto.CodigoError">
+            <summary>
+            CodigoError
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.Accidentes.IngresarArchivoAccidenteDto.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapper
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="T:ProductosBFF.Models.Accidentes.TipoAccidenteDto">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.TipoAccidenteDto.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Accidentes.TipoAccidenteDto.Descripcion">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.Accidentes.TipoAccidenteDto.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapper
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.ApiResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ApiResponse.CodResult">
+            <summary>
+            Codigo error
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ApiResponse.MessageResult">
+            <summary>
+            Descripcion error
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ApiResponse.IdSiniestro">
+            <summary>
+            Descripcion error
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoAfil">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PinRutAfil">
+            <summary>
+            Rut Afiliado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PinFolioAfil">
+            <summary>
+            Folio Suscripcion Afil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PivDvAfil">
+            <summary>
+            Digito verificador Afil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PivNombres">
+            <summary>
+            Nombres
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PivApellidos">
+            <summary>
+            Apellidos
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PivMailAfil">
+            <summary>
+            Email Afiliado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PinFonoAfil">
+            <summary>
+            Fono Afiliado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PinNumBcAfil">
+            <summary>
+            Numero BC
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PivDescripcionBc">
+            <summary>
+            Descripcion BC
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PivFechaInicioVigencia">
+            <summary>
+            Fecha Vigencia Bc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PivFechaDespido">
+            <summary>
+            Fecha Despido
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PivFechaFiniquito">
+            <summary>
+            Fecha Finiquito
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PivCausalDespido">
+            <summary>
+            Causal Despido
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PivTipoTrabajador">
+            <summary>
+            Tipo Trabajador
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PinIdParametro">
+            <summary>
+            ID Parametro Documento
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PivTipoFamilia">
+            <summary>
+            Tipo Familia
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoAfil.PinCodFun4">
+            <summary>
+            Codigo Fun 4
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudCesantia">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudCesantia.causalDespido">
+            <summary>
+            Diagnostico
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudCesantia.beneficiario">
+            <summary>
+            Nombre Beneficiario
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudCesantia.tipoSolicitud">
+            <summary>
+            Tipo Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudCesantia.productoAdicional">
+            <summary>
+            Producto Adicional
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudCesantia.fechaSolicitud">
+            <summary>
+            Fecha Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudCesantia.nroSolicitud">
+            <summary>
+            Id Solicitud Original
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudCesantia.Estado">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudCesantia.color">
+            <summary>
+            Color Tipo Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudCesantia.IDRELACIONADO">
+            <summary>
+            Id Relacionado
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudCesantia.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapper
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudVC">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudVC.diagnostico">
+            <summary>
+            Diagnostico
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudVC.beneficiario">
+            <summary>
+            Nombre Beneficiario
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudVC.tipoSolicitud">
+            <summary>
+            Tipo Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudVC.productoAdicional">
+            <summary>
+            Producto Adicional
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudVC.fechaSolicitud">
+            <summary>
+            Fecha Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudVC.nroSolicitud">
+            <summary>
+            Id Solicitud Original
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudVC.montoReembolsado">
+            <summary>
+            Descripcion Tipo Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudVC.color">
+            <summary>
+            Color Tipo Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudVC.IDRELACIONADO">
+            <summary>
+            Id Relacionado
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.BCCesantia.DtoDetalleSolicitudVC.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapeo
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoDocCesantiaShira">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCesantiaShira.FileBase64">
+            <summary>
+            Base 64
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCesantiaShira.Imagen">
+            <summary>
+            Imagen
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCesantiaShira.Rut">
+            <summary>
+            Rut
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCesantiaShira.RutaArchivo">
+            <summary>
+            Rut
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoDocCm">
+            <summary>
+            Clase Doc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.IdSistema">
+            <summary>
+            Id Sistema
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.IdFolio">
+            <summary>
+            Id Folio
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.Imagen">
+            <summary>
+            Imagen
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.Depto">
+            <summary>
+            Depto 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.ApPat">
+            <summary>
+            Apellido Paterno
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.ApMat">
+            <summary>
+            Apellido Materno
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.Nombres">
+            <summary>
+            Nombres
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.Rut">
+            <summary>
+            Rut
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.Dig">
+            <summary>
+            Dig
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.FecVisa">
+            <summary>
+            Fecha  
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.CodUsuario">
+            <summary>
+            Codigo Usuario 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.CodArea">
+            <summary>
+            Codigo Area 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.CodSistMat">
+            <summary>
+            Codigo Sistema  
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.CodTipo">
+            <summary>
+            Codigo Tipo
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.Etapa">
+            <summary>
+            Etapa 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.StrCodAccion">
+            <summary>
+            String Codigo Accion 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocCm.FileBase64">
+            <summary>
+            Archivo Base 64 
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.BCCesantia.DtoDocCm.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapeo de clase
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoDocSini">
+            <summary>
+            Datos documentos guardados en Sini Archivo
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocSini.PinIdSiniestro">
+            <summary>
+            Id Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocSini.PinIdParametro">
+            <summary>
+            ID parametro documento
+            </summary>
+            Quitar
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocSini.PivTipoDoc">
+            <summary>
+            Tipo Documento
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocSini.PivDetalleContent">
+            <summary>
+            Detalle Contenido
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoDocSini.PinIdContent">
+            <summary>
+            Id Contenido
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoEnvioCorreo">
+            <summary>
+            Clase
+            </summary>
+            
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoEnvioCorreo.PinTipoRechazo">
+            <summary>
+            Tipo de rechazo de la solicitud desde la NSD
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoEnvioCorreo.PinRutAfil">
+            <summary>
+            Rut Afiliado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoEnvioCorreo.PivDvAfil">
+            <summary>
+            Digito verificador Afil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoEnvioCorreo.PivMailAfil">
+            <summary>
+            Email Afiliado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoEnvioCorreo.PivNombres">
+            <summary>
+            Nombres
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoFun4">
+            <summary>
+            Clase Fun 4
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoFun4.Folio">
+            <summary>
+            Folio Suscripcion del usuario
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoFun4.Token">
+            <summary>
+            Token de sesion del usuario
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoFun4.Id">
+            <summary>
+            Id de usuario
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoFun4.Fecha">
+            <summary>
+            Fecha de Autorizacion del usuario 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoFun4.Ip">
+            <summary>
+            Ip de cliente
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.BCCesantia.DtoFun4.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapeo
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="M:ProductosBFF.Models.BCCesantia.DtoFun4.GetServerIp">
+            <summary>
+            Metodo que trae la ip del servidor
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoHistorialSolicitudes">
+            <summary>
+            Clase de respuesta para el historial de solicitudes
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoHistorialSolicitudes.tipoSolicitud">
+            <summary>
+            Tipo Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoHistorialSolicitudes.productoAdicional">
+            <summary>
+            BC
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoHistorialSolicitudes.fechaSolicitud">
+            <summary>
+            Fecha de la solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoHistorialSolicitudes.id">
+            <summary>
+            Id de la solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoHistorialSolicitudes.estado">
+            <summary>
+            Estado de la solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoHistorialSolicitudes.color">
+            <summary>
+            Color que va retornar
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoHistorialSolicitudes.idRelacionado">
+            <summary>
+            Id Padre
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoHistorialSolicitudes.TipoSiniestro">
+            <summary>
+            Tipo de la solicitud
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.BCCesantia.DtoHistorialSolicitudes.Mapping(AutoMapper.Profile)">
+            <summary>
+            Metodo de mapeo
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoInformacionTraza">
+            <summary>
+            Informacion Traza
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoInformacionTraza.titulo">
+            <summary>
+            Titulo
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoInformacionTraza.descripcion">
+            <summary>
+            Descripcion
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoInformacionTraza.fechaDescripcion">
+            <summary>
+            Fecha Descripcion
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoInformacionTraza.enlace">
+            <summary>
+            Enlace
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoInformacionTraza.boton">
+            <summary>
+            Boton
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoInformacionTraza.enlaceBoton">
+            <summary>
+            Enlace Boton
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoInformacionTraza.estiloBoton">
+            <summary>
+            Estilo boton
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoInformacionTraza.idOrden">
+            <summary>
+            Id Orden
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoResponseDiagnostico">
+            <summary>
+            Dtp Response Diagnostico
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoResponseDiagnostico.id_siniestro">
+            <summary>
+            Id Siniestro
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoResponseDiagnostico.descripcion_bc">
+            <summary>
+            Descripcion Bc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoResponseDiagnostico.tipo_accidente">
+            <summary>
+            Tipo Accidente
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoResponseInfoPadre">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoResponseInfoPadre.status">
+            <summary>
+            Estado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoResponseInfoPadre.etapa">
+            <summary>
+            Etapa
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoResponseInfoPadre.fechaEtapa">
+            <summary>
+            Fecha Etapa
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoResponseInfoPadre.estado">
+            <summary>
+            Estado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoResponseInfoPadre.idSiniestro">
+            <summary>
+            Id Estado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoResponseInfoPadre.informacion">
+            <summary>
+            Info
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.DtoResponseTrazaPadre">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoResponseTrazaPadre.estado">
+            <summary>
+            Estado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoResponseTrazaPadre.color">
+            <summary>
+            Color
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.DtoResponseTrazaPadre.informacionPadre">
+            <summary>
+            Color
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.ResponseBcAfilSini">
+            <summary>
+            Clase que recibe siniestro
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseBcAfilSini.CodResult">
+            <summary>
+            Codigo error
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseBcAfilSini.MessageResult">
+            <summary>
+            Descripcion error
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseBcAfilSini.IdSiniestro">
+            <summary>
+            Id Siniestro 
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudCesantia">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudCesantia.NOMBRE_TITULAR">
+            <summary>
+            Nombre del afiliado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudCesantia.APELLIDOS_TITULAR">
+            <summary>
+            Apellido del afiliado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudCesantia.CAUSAL_DESPIDO">
+            <summary>
+            Causal de despido
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudCesantia.NOMBRE_BENEFICIARIO">
+            <summary>
+            Nombre beneficiario
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudCesantia.TIPO_SOLICITUD">
+            <summary>
+            Tipo Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudCesantia.PRODUCTO_ADICIONAL">
+            <summary>
+            BC
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudCesantia.FECHA_SOLICITUD">
+            <summary>
+            Fecha de la solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudCesantia.ID_SOLICITUD_ORIGINAL">
+            <summary>
+            Id Solicitud Original
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudCesantia.DESCRIPCION_TIPO_SOLICITUD">
+            <summary>
+            Descripcion Tipo Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudCesantia.TIPO_SOL_COLOR">
+            <summary>
+            Color Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudCesantia.IDRELACIONADO">
+            <summary>
+            Id Relacionado
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudVC">
+            <summary>
+            Clase Historial Cabecera
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudVC.NOMBRE_TITULAR">
+            <summary>
+            Nombre Titular
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudVC.APELLIDOS_TITULAR">
+            <summary>
+            Apellidos Titular
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudVC.DIAGNOSTICO">
+            <summary>
+            Diagnostico
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudVC.NOMBRE_BENEFICIARIO">
+            <summary>
+            Nombre Beneficiario
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudVC.TIPO_SOLICITUD">
+            <summary>
+            Tipo Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudVC.PRODUCTO_ADICIONAL">
+            <summary>
+            Producto Adicional
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudVC.FECHA_SOLICITUD">
+            <summary>
+            Fecha Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudVC.ID_SOLICITUD_ORIGINAL">
+            <summary>
+            Id Solicitud Original
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudVC.DESCRIPCION_TIPO_SOLICITUD">
+            <summary>
+            Descripcion Tipo Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudVC.TIPO_SOL_COLOR">
+            <summary>
+            Color Tipo Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseDetalleSolicitudVC.IDRELACIONADO">
+            <summary>
+            Id Relacionado
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.ResponseEnviarArchivo">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseEnviarArchivo.Error">
+            <summary>
+            Codigo Error
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseEnviarArchivo.ErrorMessage">
+            <summary>
+            Mensaje Error
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.ResponseEnvioCorreo">
+            <summary>
+            Respuesta a envio de correo
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseEnvioCorreo.Error">
+            <summary>
+            Codigo Error
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseEnvioCorreo.ErrorMessage">
+            <summary>
+            Mensaje Error
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.ResponseHistorialSolicitudes">
+            <summary>
+            Clase que recipe desde la APi Productos el historial de solicitudes
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseHistorialSolicitudes.tipo_solicitud">
+            <summary>
+            Tipo Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseHistorialSolicitudes.producto_adicional">
+            <summary>
+            BC
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseHistorialSolicitudes.fecha_solicitud">
+            <summary>
+            Fecha Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseHistorialSolicitudes.Id_Solicitud">
+            <summary>
+            Id del siniestro
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseHistorialSolicitudes.Descripcion_tipo_solicitud">
+            <summary>
+            Descripcion de la solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseHistorialSolicitudes.Tipo_Sol_Color">
+            <summary>
+            Color que va a mostrar
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseHistorialSolicitudes.IdRelacionado">
+            <summary>
+            Id Relacionado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseHistorialSolicitudes.TIPO_SINIESTRO">
+            <summary>
+            Tipo de siniestro
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.ResponseObtenerDiagnostico">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseObtenerDiagnostico.id_siniestro">
+            <summary>
+            Id Siniestro
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseObtenerDiagnostico.descripcion_bc">
+            <summary>
+            Descripcion Bc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseObtenerDiagnostico.tipo_accidente">
+            <summary>
+            Tipo Accidente
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.ID_SINIESTRO">
+            <summary>
+            Id Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.ID_ORDEN">
+            <summary>
+            Id Orden
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.FOLIO_AFIL">
+            <summary>
+            Folio Afil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.RUT_AFIL">
+            <summary>
+            Rut Afil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.DV_AFIL">
+            <summary>
+            Dv Afil
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.ETAPA_BACK">
+            <summary>
+            Etapa Back
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.ESTADO">
+            <summary>
+            Estado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.COLOR">
+            <summary>
+            Color
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.ETAPA_FRONT">
+            <summary>
+            Etapa Front
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.STATUS">
+            <summary>
+            Estado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.FEC_ING_REG">
+            <summary>
+            Fecha ingreso registro
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.TITULO_INFO">
+            <summary>
+            Titulo Info
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseTrazaPadre.DESCRIPCION_INFO">
+            <summary>
+            Descripcion Info
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.BCCesantia.ResponseValidaFun4">
+            <summary>
+            Clase que representa la respuesta de validación de la función 4.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseValidaFun4.ID_Content_Manager">
+            <summary>
+            Obtiene o establece el identificador del Content Manager.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseValidaFun4.Folio">
+            <summary>
+            Obtiene o establece el folio para la validación de la función 4.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.BCCesantia.ResponseValidaFun4.SolicitudValida">
+            <summary>
+            Solciitud si es valida de crear
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.Causales.CausalesDto">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Causales.CausalesDto.Id_Causales_Despido">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Causales.CausalesDto.Causales_Despido">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Causales.CausalesDto.Id_Tipo_Trabajador">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.Causales.MotivosCancelacionDto">
+            <summary>
+            Clase Dto Motivos Cancelacion
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Causales.MotivosCancelacionDto.Codigo">
+            <summary>
+            Codigo Motivo
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Causales.MotivosCancelacionDto.Descripcion">
+            <summary>
+            Descripcion Motivo
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.Commons.GenericResponse">
+            <summary>
+            ResponseDescription
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Commons.GenericResponse.SuccessfulOperation">
+            <summary>
+            SuccessfulOperation
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Commons.GenericResponse.StatusCode">
+            <summary>
+            StatusCode
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Commons.GenericResponse.Message">
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Commons.GenericResponse.Errors">
+            <summary>
+            Errors
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.Commons.GenericResult`1">
+            <summary>
+            GenericResponse
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.Commons.GenericResult`1.#ctor(`0,System.Int32,System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            GenericResult Constructor
+            </summary>
+            <param name="result"></param>
+            <param name="statusCode"></param>
+            <param name="message"></param>
+            <param name="errors"></param>
+        </member>
+        <member name="P:ProductosBFF.Models.Commons.GenericResult`1.Result">
+            <summary>
+            Result
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Commons.GenericResult`1.Response">
+            <summary>
+            Response
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.Enums.EnumTipoActivacion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ProductosBFF.Models.Enums.EnumTipoActivacion.CESANTIA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ProductosBFF.Models.Enums.EnumTipoActivacion.VIDA_CAMARA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ProductosBFF.Models.Enums.EnumTipoActivacion.FAMILIA_PROTEGIDA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ProductosBFF.Models.Enums.EnumTipoActivacion.URGENCIA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.Productos.CancelaBcCostoCeroResponse">
+            <summary>
+            Respuesta del servicio cancela bc costo cero
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.CancelaBcCostoCeroResponse.nroSolicitud">
+            <summary>
+            Codigo respuesta API
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.CancelaBcCostoCeroResponse.disponibleHasta">
+            <summary>
+            /Mensaje retorno API
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.CancelaBcCostoCeroResponse.documentoBase64">
+            <summary>
+            Documento en Base64
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.CancelaBcCostoCeroResponse.fechaTerminoBeneficio">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.Productos.DocumentoBCDto">
+            <summary>
+            DocumentoBCDto
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.DocumentoBCDto.Base64">
+            <summary> Archivo Base 64 </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.DocumentoBCDto.Cabecera">
+            <summary> Extensión </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.DocumentoBCDto.Titulo">
+            <summary> Archivo </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.Productos.Fun4">
+            <summary>
+            Clase para recibir la respuesta de la API Afil para Fun4.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.Fun4.Mensaje">
+            <summary>
+            Obtiene o establece el mensaje de la respuesta.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.Fun4.Codigo">
+            <summary>
+            Obtiene o establece el código de la respuesta.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.Fun4.Fun">
+            <summary>
+            Obtiene o establece el número de Fun.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.Fun4.Content">
+            <summary>
+            Obtiene o establece el contenido de la respuesta.
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.Fun4.PinCodFun4">
+            <summary>
+            Obtiene o establece el código PIN de Fun4.
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.Productos.PactadoDto">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.CODIGO_SUCURSAL_ISAPRE">
+            <summary>
+            CODIGO_SUCURSAL_ISAPRE
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.RAZON_SOCIAL">
+            <summary>
+            RAZON_SOCIAL
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.COAF_FOLIO_SUSCRIPCION">
+            <summary>
+            COAF_FOLIO_SUSCRIPCION
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.COAF_ORGA_CODIGO_ISAPRE">
+            <summary>
+            COAF_ORGA_CODIGO_ISAPRE
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.SECUENCIA">
+            <summary>
+            SECUENCIA
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.TIPO_TRABAJADOR">
+            <summary>
+            TIPO_TRABAJADOR
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.FECHA_INICIO_DESCUENTO_COTIZAC">
+            <summary>
+            FECHA_INICIO_DESCUENTO_COTIZAC
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.MODALIDAD_COTIZACION">
+            <summary>
+            MODALIDAD_COTIZACION
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.RENTA_IMPONIBLE">
+            <summary>
+            RENTA_IMPONIBLE
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.CECO_CODIGO">
+            <summary>
+            CECO_CODIGO
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.CECO_UNOR_CORRELATIVO">
+            <summary>
+            CECO_UNOR_CORRELATIVO
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.CECO_EMPR_RUT">
+            <summary>
+            CECO_EMPR_RUT
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.COTIZACION_TOTAL">
+            <summary>
+            COTIZACION_TOTAL
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.COLE_ADICIONAL">
+            <summary>
+            COLE_ADICIONAL
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.MONTO_PACTADO_UF">
+            <summary>
+            MONTO_PACTADO_UF
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.MONTO_PACTADO_PESO">
+            <summary>
+            MONTO_PACTADO_PESO
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.MONTO_PACTADO_SIETE">
+            <summary>
+            MONTO_PACTADO_SIETE
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.ADICIONAL_RN">
+            <summary>
+            ADICIONAL_RN
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.MONTO_COTIZACION">
+            <summary>
+            MONTO_COTIZACION
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.PORCENT_COTIZACION_LEY_18566">
+            <summary>
+            PORCENT_COTIZACION_LEY_18566
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.RENTA_BRUTA">
+            <summary>
+            RENTA_BRUTA
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.PactadoDto.MONTO_A_ENTERAR">
+            <summary>
+            MONTO_A_ENTERAR
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Models.Productos.ProductDto">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.name">
+            <summary>
+            Nombre
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.amountUf">
+            <summary>
+            Monto
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.valueAprox">
+            <summary>
+            Valor
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.fecha_inicio">
+            <summary>
+            Fecha de Contrato de Plan
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.usar_desde">
+            <summary>
+            Fecha disponibilidad del plan
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.codigo_plan">
+            <summary>
+            Codigo compuesto del Plan
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.url_contrato">
+            <summary>
+            URL de contrato 
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.plazo_uso">
+            <summary>
+            mese de carencia
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.texto_etiqueta">
+            <summary>
+            Texto de la etiqueta
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.color_etiqueta">
+            <summary>
+            Color de la etiqueta
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.icono">
+            <summary>
+            ICONO
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.plazo_valido">
+            <summary>
+            plazo valido
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.texto_solicitud">
+            <summary>
+            texto solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.familia">
+            <summary>
+            familia
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.es_multicotizante">
+            <summary>
+            es_multicotizante
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.es_colectivo">
+            <summary>
+            es_colectivo
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.tipoActivacion">
+            <summary>
+            tipo de activacion
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.es_cesantia">
+            <summary>
+            Es Cesantia
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.es_urgencia">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.es_vida_camara">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.es_familia_protegida">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.FlagMantencion">
+            <summary>
+            Fecha que mostrara la franja cuando el sistema esté en mantencion
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.EsCostoCero">
+            <summary>
+            Campo que indica si es costo Cero
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.FechaCancelado">
+            <summary>
+            Fecha cuando se cancela el BC
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.DisponibleHasta">
+            <summary>
+            Fecha Hasta cuando esta con costo cero
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.DuracionBCGratis">
+            <summary>
+            Duracion de dias que esta con costo cero
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.SeEstaCobrandoBc">
+            <summary>
+            Indica si se esta cobrando el bc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductDto.SePuedeCancelar">
+            <summary>
+            Indica si se puede cancelar el BC
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.Productos.ProductDto.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapper
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="M:ProductosBFF.Models.Productos.ProductDto.CalculoMeses(System.DateTime,System.DateTime)">
+            <summary>
+            Metodo para calcular los meses restantes a partir de un plazo de fecha
+            </summary>
+            <param name="fechaInicio"></param>
+            <param name="fechaFin"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ProductosBFF.Models.Productos.ProductLeyCortaDto">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.folio_suscripcion">
+            <summary>
+            Folio afiliado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.id">
+            <summary>
+            codigo bc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.name">
+            <summary>
+            nombre del bc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.fecha_inicio">
+            <summary>
+            fecha inicio
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.incluido_plan">
+            <summary>
+            flag si incluye plan
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.usar_desde">
+            <summary>
+            fecha usar desde producto
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.plazo_valido">
+            <summary>
+            plazo de uso
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.codigo_plan">
+            <summary>
+            Codigo plan
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.plazo_uso">
+            <summary>
+            Plazo Uso
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.texto_etiqueta">
+            <summary>
+            Texto etiqueta
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.color_etiqueta">
+            <summary>
+            Color etiqueta front
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.icono">
+            <summary>
+            Icono
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.texto_solicitud">
+            <summary>
+            Texto Solicitud
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.familia">
+            <summary>
+            Familia del bc
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.url_resumen">
+            <summary>
+            Url
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.url_condiciones">
+            <summary>
+            Url
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.Productos.ProductLeyCortaDto.valueAprox">
+            <summary>
+            Url
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Models.Productos.ProductLeyCortaDto.Mapping(AutoMapper.Profile)">
+            <summary>
+            Mapper
+            </summary>
+            <param name="profile"></param>
+        </member>
+        <member name="T:ProductosBFF.Models.VidaCamara.ResponseRegistraContinuidadVc">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.VidaCamara.ResponseRegistraContinuidadVc.pou_id_siniestroNEW">
+            <summary>
+            Siniestro Generado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.VidaCamara.ResponseRegistraContinuidadVc.pou_cod_estado">
+            <summary>
+            Codigo estado
+            </summary>
+        </member>
+        <member name="P:ProductosBFF.Models.VidaCamara.ResponseRegistraContinuidadVc.pou_desc_err">
+            <summary>
+            Descripcion error
+            </summary>
+        </member>
+        <member name="T:ProductosBFF.Program">
+            <summary>
+            Program Class
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Program.Main(System.String[])">
+            <summary>
+            Main method
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:ProductosBFF.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Create Host Builder
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ProductosBFF.Services.ProductoService">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.#ctor(ProductosBFF.Interfaces.IProductoInfrastructure,AutoMapper.IMapper,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ProductosBFF.Services.ProductoService})">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.GetProductos(ProductosBFF.Domain.Parameters.BodyProducto)">
+            <summary>
+            GetProductos
+            </summary>
+            <param name="rut"></param>
+            <exception cref="T:System.Exception"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.GetProductosLeyCorta(System.Decimal)">
+            <summary>
+            GetProductosLeyCorta
+            </summary>
+            <param name="rut"></param>
+            <exception cref="T:System.Exception"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.CancelaBcCostoCero(ProductosBFF.Domain.Parameters.BodyCancelarBcParam)">
+            <summary>
+            Servicio que cancela bc costo cero
+            </summary>
+            <param name="bodyCancelarBcParam"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.GetDocumentsBase64(ProductosBFF.Domain.Parameters.ProductoBC)">
+            <summary> Get Base 64 BC </summary>
+            <param name="codeBc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.EnviarDatosCesantia(ProductosBFF.Domain.Parameters.BodySolicitudActivacion)">
+            <summary>
+            Datos Cesantia
+            </summary>
+            <param name="solicitud"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.DetalleSolicitudVC(ProductosBFF.Domain.Parameters.BodyHistorialCabecera)">
+            <summary>
+            /
+            </summary>
+            <param name="bodyHistorialCabecera"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.DetalleSolicitudCesantia(ProductosBFF.Domain.Parameters.BodyHistorialCabecera)">
+            <summary>
+            
+            </summary>
+            <param name="bodyHistorialCabecera"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.HistorialSolicitudes(ProductosBFF.Domain.Parameters.BodyHistorialSolicitudes)">
+            <summary>
+            Metodo que trae el historial de solicitudes del afiliado
+            </summary>
+            <param name="bodyHistorialSolicitudes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.GetCausales">
+            <summary>
+            Trae causales de despido
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.GetMotivos">
+            <summary>
+            Trae Motivos Cancelacion
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.EnvioArchivoSini(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Metodo para enviar archivo sini
+            </summary>
+            <param name="idSiniestro"></param>
+            <param name="idContent"></param>
+            <param name="detalleContent"></param>
+            <param name="tipoDoc"></param>
+            <param name="idParametro"></param>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.GetContinuidadProductoService(ProductosBFF.Domain.Parameters.ContinuidadProducto)">
+            <summary>
+            GetContinuidadProductoService
+            </summary>
+            <param name="rut"></param>
+            <exception cref="T:System.Exception"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.RegistraSolicitudContinuidadCesantia(ProductosBFF.Domain.Parameters.BodySolicitudActivacion)">
+            <summary>
+            Registra una nueva solicitud de continuidad de BC de cesantía
+            </summary>
+            <param name="solicitud"></param>
+            <returns>El Id del siniestro en caso de haber sido ejecutado correctamente</returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.EnviarCorreo(ProductosBFF.Domain.Parameters.EnvioCorreo)">
+            <summary>
+            Datos Cesantia
+            </summary>
+            <param name="envioCorreo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.EnviarFun4(ProductosBFF.Models.BCCesantia.DtoFun4)">
+            <summary>
+            Envia Datos para api Afil para id content fun4
+            </summary>
+            <param name="datosFun4"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.ObtenerTipoAccidente">
+            <summary>
+            Obtener tipo accidente
+            </summary>
+            <exception cref="T:System.Exception"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.ObtenerCausalAccidente(ProductosBFF.Domain.Parameters.ParamTipoAccidente)">
+            <summary>
+            Obtener causal accidente
+             <param name="tipoAccidente"></param>
+            </summary>
+            <exception cref="T:System.Exception"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.ObtenerDocumentosAccidente(ProductosBFF.Domain.Parameters.BodyDocumentosAccidente)">
+            <summary>
+            Obtener documentos accidente
+             <param name="documentosAccidente"></param>
+            </summary>
+            <exception cref="T:System.Exception"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.IngresarArchivoAccidente(ProductosBFF.Domain.Parameters.BodyIngresarArchivoAccidente)">
+            <summary>
+            Ingresar archivo accidente
+             <param name="ingresarArchivoAccidente"></param>
+            </summary>
+            <exception cref="T:System.Exception"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.IngresarAccidente(ProductosBFF.Domain.Parameters.BodyIngresarAccidente)">
+            <summary>
+            Ingresar accidente
+             <param name="ingresarAccidente"></param>
+            </summary>
+            <exception cref="T:System.Exception"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.CargaArchivosShira(ProductosBFF.Domain.Parameters.BodyCargarArchivoShira)">
+            <summary>
+            cargarArchivoShira
+             <param name="cargarArchivoShira"></param>
+            </summary>
+            <exception cref="T:System.Exception"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.CargaArchivosContent(ProductosBFF.Domain.Parameters.BodyCargarArchivoContent)">
+            <summary>
+            Carga archivo a content
+            </summary>
+            <param name="cargarArchivoContent"></param>
+            <returns>El Id del content</returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.SolicitudesTrazaPadre(ProductosBFF.Domain.Parameters.TrazaPadreParam)">
+            <summary>
+            
+            </summary>
+            <param name="bodyTrazaPadreParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Services.ProductoService.ObtenerDiagnosticoVc(ProductosBFF.Domain.Parameters.BodyObtenerDiagnostico)">
+            <summary>
+            
+            </summary>
+            <param name="obtenerDiagnostico"></param>
+            <returns></returns>
+            <exception cref="T:ProductosBFF.Exceptions.ContentManagerException"></exception>
+        </member>
+        <member name="T:ProductosBFF.Startup">
+            <summary>
+            Clase startup
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:ProductosBFF.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configure Services
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:ProductosBFF.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configure
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+        <member name="M:ProductosBFF.Startup.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Agregar la configuración de swagger
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="T:ProductosBFF.Utils.HttpClientService">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Utils.HttpClientService.#ctor(System.Net.Http.IHttpClientFactory,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ProductosBFF.Utils.HttpClientService})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="httpClientFactory"></param>
+            <param name="config"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:ProductosBFF.Utils.HttpClientService.AddHeaders(System.Net.Http.HttpRequestMessage,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Método para agregar headers a una solicitud HTTP.
+            </summary>
+            <param name="request">La solicitud HTTP.</param>
+            <param name="headers">Los headers a agregar.</param>
+        </member>
+        <member name="M:ProductosBFF.Utils.HttpClientService.GetAsync``1(System.String,System.Object,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="queryParams"></param>
+            <param name="headers"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Utils.HttpClientService.PostAsync``1(System.String,System.Object,System.Object,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="body"></param>
+            <param name="queryParams"></param>
+            <param name="headers"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Utils.HttpClientService.PutAsync``1(System.String,System.Object,System.Object,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="body"></param>
+            <param name="queryParams"></param>
+            <param name="headers"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:ProductosBFF.Utils.StringMethods">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Utils.StringMethods.Capitalize(System.String)">
+            <summary>
+            Capitalizar string
+            </summary>
+            <param name="word"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Utils.StringMethods.Decode(System.String)">
+            <summary>
+            Decode
+            </summary>
+            <param name="encoded"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Utils.StringMethods.Format(System.String)">
+            <summary>
+            Decode
+            </summary>
+            <param name="encoded"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductosBFF.Utils.StringMethods.GetPathAndQuery(System.String)">
+            <summary>
+            GetPathAndQuery
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ProductosBFF.Utils.Utiles">
+            <summary>
+            Clase
+            </summary>
+        </member>
+        <member name="M:ProductosBFF.Utils.Utiles.GetTimeOut">
+            <summary>
+            GetTimeOut
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

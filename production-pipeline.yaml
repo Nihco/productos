@@ -1,0 +1,63 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - README.md
+    - .gitignore
+variables:
+- group: productosBffGlobalesNVirgina
+
+stages:
+- stage: BuildAndDeployTes
+  displayName: 'Build and Deploy Tes'
+  jobs:
+    - job:  'BuildImage'
+      pool: DockerAgents
+      steps:
+        # - task: JavaToolInstaller@0
+        #   inputs:
+        #     versionSpec: '11'
+        #     jdkArchitectureOption: 'x64'
+        #     jdkSourceOption: 'PreInstalled'
+        # # SonarQube
+        # - task: SonarQubePrepare@4
+        #   displayName: "SonarQube Prepare"
+        #   inputs:
+        #     SonarQube: 'SonarQube-NSD - CuentasBancarias'
+        #     scannerMode: 'CLI'
+        #     configMode: 'manual'
+        #     cliProjectKey: '$(Build.Repository.ID)'
+        #     cliProjectName: '$(System.TeamProject)-$(Build.Repository.Name)'
+        #     cliProjectVersion: '$(Build.BuildNumber)'
+        #     cliSources: 'src/'
+        # - task: PowerShell@2
+        #   displayName: "SQ branch name transformation"
+        #   inputs:
+        #     targetType: 'inline'
+        #     script: |
+        #       $params = "$env:SONARQUBE_SCANNER_PARAMS" -replace '"sonar.branch.name":"[\w,/,-]*"\,?'
+        #       Write-Host "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$params"
+        # - task: SonarQubeAnalyze@4
+        #   displayName: 'Run Code Analysis'
+        #   continueOnError: true
+        # - task: SonarQubePublish@4
+        #   displayName: 'Publish Quality Gate Result'
+        #   continueOnError: true
+        #   inputs:
+        #     pollingTimeoutSec: '300'
+        - task: Docker@2
+          displayName: Docker Build
+          inputs:
+            buildContext: .
+            command: build
+            Dockerfile: ProductosBFF/Dockerfile
+            repository: $(IMAGE_NAME)
+            tags: |
+              $(Build.SourceVersion)
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(System.DefaultWorkingDirectory)/kubernetes-deploy.tokenized.yaml'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'
